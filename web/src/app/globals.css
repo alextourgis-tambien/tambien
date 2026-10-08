@@ -360,6 +360,13 @@ main {
   flex-wrap: wrap;
   margin: 0 var(--margin) 1.25rem;
 }
+.footer a {
+  transition: opacity 180ms ease;
+}
+.footer a:hover,
+.footer a:focus-visible {
+  opacity: 0.55;
+}
 .footer nav:first-child {
   display: flex;
   gap: 0.3rem;

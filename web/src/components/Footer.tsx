@@ -27,7 +27,7 @@ export function Footer({
             ["legals", t.legals],
           ].map(([url, title]) => (
             <Link key={url} href={`/${lang}${url ? "/" + url : ""}`}>
-              {title}
+              <span>{title}</span>
             </Link>
           ))}
           {settings.youtubeUrl ? (
