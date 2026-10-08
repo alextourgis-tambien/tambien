@@ -1014,6 +1014,11 @@ main {
   transition: opacity 180ms ease;
   z-index: 3;
 }
+/* Every process preview uses the Strategy reference's landscape frame. */
+.process-follow .media,
+.process-mobile-media {
+  aspect-ratio: 293 / 164 !important;
+}
 .process-follow[data-visible="true"] {
   opacity: 1;
 }
