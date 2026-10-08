@@ -37,7 +37,7 @@ export function ContactCTA({
           <span>{translate(settings.ctaSecondary, lang)}</span>
         </h2>
         <div className="cta-actions">
-          <a href={settings.callUrl}>
+          <a className="pill dark cta-call" href={settings.callUrl}>
             <HoverLabel>{t.call}</HoverLabel>
           </a>
           {settings.whatsappUrl ? (
