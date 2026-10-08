@@ -7,6 +7,22 @@ import { useEffect, useRef, useState } from "react";
 import { labels, type Language } from "@/lib/i18n";
 import type { Settings } from "@/lib/types";
 import { homeAssets } from "@/data/seed";
+function MenuIcon() {
+  return (
+    <svg
+      width="37"
+      height="26"
+      viewBox="0 0 37 26"
+      fill="none"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <g className="menu-plus">
+        <path d="M19.0088 7v11.0098M24.0098 13.0078H13" stroke="currentColor" />
+      </g>
+    </svg>
+  );
+}
 export function Header({
   lang,
   settings,
@@ -18,6 +34,36 @@ export function Header({
   const [time, setTime] = useState("");
   const dialog = useRef<HTMLDialogElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
+  const closing = useRef<Animation | null>(null);
+  const closeMenu = () => {
+    if (!dialog.current?.open || closing.current) return;
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setOpen(false);
+      return;
+    }
+    const panel = dialog.current.querySelector(".menu-panel")!;
+    const appearance = getComputedStyle(panel);
+    closing.current = panel.animate(
+      [
+        { opacity: appearance.opacity, transform: appearance.transform },
+        { opacity: 0, transform: "translateY(-6px) scale(.98)" },
+      ],
+      { duration: 180, easing: "cubic-bezier(.4,0,1,1)", fill: "forwards" },
+    );
+    dialog.current
+      .querySelector(".menu-plus")
+      ?.animate(
+        [{ transform: "rotate(45deg)" }, { transform: "rotate(0deg)" }],
+        { duration: 180, easing: "ease-out", fill: "forwards" },
+      );
+    closing.current.finished
+      .then(() => {
+        closing.current = null;
+        setOpen(false);
+      })
+      .catch(() => {});
+  };
+  useEffect(() => () => closing.current?.cancel(), []);
   const pathname = usePathname();
   const t = labels[lang];
   useEffect(() => {
@@ -46,6 +92,11 @@ export function Header({
       document.body.style.overflow = "hidden";
     } else {
       dialog.current?.close();
+      dialog.current
+        ?.querySelectorAll(".menu-panel, .menu-plus")
+        .forEach((node) =>
+          node.getAnimations().forEach((animation) => animation.cancel()),
+        );
       document.body.style.overflow = "";
     }
     return () => {
@@ -87,12 +138,7 @@ export function Header({
             aria-expanded={open}
             aria-controls="site-menu"
           >
-            <Image
-              src={homeAssets.imgFrame37597}
-              width={37}
-              height={26}
-              alt=""
-            />
+            <MenuIcon />
           </button>
         </nav>
         <div className="header-contact">
@@ -110,27 +156,25 @@ export function Header({
         id="site-menu"
         ref={dialog}
         className="menu-dialog"
-        onCancel={() => setOpen(false)}
+        onCancel={(event) => {
+          event.preventDefault();
+          closeMenu();
+        }}
         onClose={() => {
           setOpen(false);
           trigger.current?.focus();
         }}
         onClick={(e) => {
-          if (e.target === dialog.current) setOpen(false);
+          if (e.target === dialog.current) closeMenu();
         }}
       >
         <div className="menu-panel">
           <button
             className="pill menu-trigger menu-close"
             aria-label={t.close}
-            onClick={() => setOpen(false)}
+            onClick={closeMenu}
           >
-            <Image
-              src={homeAssets.imgFrame37597}
-              width={37}
-              height={26}
-              alt=""
-            />
+            <MenuIcon />
           </button>
           <nav aria-label={t.menu}>
             {entries.map((entry, index) => {

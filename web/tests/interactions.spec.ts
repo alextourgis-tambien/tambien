@@ -11,6 +11,11 @@ test("menu matches the compact black dropdown and hover emphasis", async ({
     "background-color",
     "rgb(0, 0, 0)",
   );
+  await page
+    .locator(".menu-panel")
+    .evaluate((panel) =>
+      Promise.all(panel.getAnimations().map((animation) => animation.finished)),
+    );
   await expect(page.locator(".menu-panel nav > *")).toHaveCount(6);
   await expect(page.locator(".menu-panel nav")).not.toContainText("Services");
   const studio = page

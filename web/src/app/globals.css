@@ -965,8 +965,47 @@ main {
   top: -2.25rem;
   right: 0;
 }
-.menu-close img {
-  transform: rotate(45deg);
+.menu-plus {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 350ms cubic-bezier(.2,.8,.2,1);
+}
+.menu-trigger {
+  transition: background-color 200ms ease;
+}
+.menu-trigger svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+@media (hover: hover) and (pointer: fine) {
+  .menu-trigger:hover { background-color: #eaeaea; }
+  .menu-trigger:hover .menu-plus { transform: rotate(90deg); }
+  .menu-close:hover .menu-plus { transform: rotate(135deg); }
+}
+.menu-trigger[aria-expanded="true"] .menu-plus,
+.menu-close .menu-plus { transform: rotate(45deg); }
+.menu-dialog[open] .menu-panel {
+  transform-origin: top right;
+  animation: menu-reveal 280ms cubic-bezier(.2,.8,.2,1) both;
+}
+.menu-dialog[open] .menu-close .menu-plus {
+  animation: menu-plus-open 280ms cubic-bezier(.2,.8,.2,1);
+}
+@keyframes menu-reveal {
+  from { opacity: 0; transform: translateY(-8px) scale(.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes menu-plus-open {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(45deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu-plus { transition: none; }
+  .menu-trigger:hover .menu-plus { transform: none; }
+  .menu-close:hover .menu-plus { transform: rotate(45deg); }
+  .menu-dialog[open] .menu-panel,
+  .menu-dialog[open] .menu-close .menu-plus { animation: none; }
 }
 .process {
   position: relative;
