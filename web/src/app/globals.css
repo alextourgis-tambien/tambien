@@ -212,9 +212,9 @@ main {
   color: #888;
 }
 .process-step {
+  position: relative;
   border-top: 1px solid #ddd;
-  margin-bottom: 1.875rem;
-  padding-top: 1.625rem;
+  padding-block: 1.625rem 1.875rem;
 }
 .process-step summary {
   display: grid;
@@ -984,6 +984,20 @@ main {
   font: inherit;
   font-weight: 700;
   cursor: pointer;
+}
+/* Extend the native button hit area to the entire row, including its reveal. */
+.process-summary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+}
+.process-summary:focus-visible {
+  outline: none;
+}
+.process-summary:focus-visible::after {
+  outline: 2px solid black;
+  outline-offset: -3px;
 }
 .process-summary span:last-child {
   text-align: right;
