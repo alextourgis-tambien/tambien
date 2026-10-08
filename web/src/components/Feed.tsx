@@ -46,7 +46,13 @@ export function Feed({
                     { "--reading-order": item.order } as React.CSSProperties
                   }
                 >
-                  {href ? <Link href={href}>{content}</Link> : content}
+                  {href ? (
+                    <Link data-motion-card href={href}>
+                      {content}
+                    </Link>
+                  ) : (
+                    content
+                  )}
                 </article>
               );
             })}

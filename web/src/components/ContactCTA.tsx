@@ -1,4 +1,5 @@
 "use client";
+import { HoverLabel } from "./HoverLabel";
 import Image from "next/image";
 import { labels, translate, type Language } from "@/lib/i18n";
 import type { Settings } from "@/lib/types";
@@ -31,9 +32,13 @@ export function ContactCTA({
           <span>{translate(settings.ctaSecondary, lang)}</span>
         </h2>
         <div className="cta-actions">
-          <a href={settings.callUrl}>{t.call}</a>
+          <a href={settings.callUrl}>
+            <HoverLabel>{t.call}</HoverLabel>
+          </a>
           {settings.whatsappUrl ? (
-            <a href={settings.whatsappUrl}>WhatsApp</a>
+            <a href={settings.whatsappUrl}>
+              <HoverLabel>WhatsApp</HoverLabel>
+            </a>
           ) : null}
           <a ref={follower} className="founder" href={settings.callUrl}>
             <Image

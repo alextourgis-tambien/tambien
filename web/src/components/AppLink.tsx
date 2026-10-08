@@ -1,6 +1,7 @@
 "use client";
 import NextLink from "next/link";
 import type { ComponentProps } from "react";
+import { HoverLabel } from "./HoverLabel";
 import { NavigationLoader } from "./Loader";
 export default function AppLink({
   children,
@@ -8,7 +9,11 @@ export default function AppLink({
 }: ComponentProps<typeof NextLink>) {
   return (
     <NextLink {...props}>
-      {children}
+      {typeof children === "string" && !props.hrefLang ? (
+        <HoverLabel>{children}</HoverLabel>
+      ) : (
+        children
+      )}
       <NavigationLoader />
     </NextLink>
   );

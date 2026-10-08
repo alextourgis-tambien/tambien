@@ -1,7 +1,7 @@
 {
   "name": "tambien",
   "version": "1.0.0",
-  "description": "Tambi\u00e9n studio website \u2014 Next.js, Sanity, FR / EN / ES",
+  "description": "También studio website — Next.js, Sanity, FR / EN / ES",
   "scripts": {
     "dev": "next dev --webpack",
     "build": "next build --webpack",
@@ -24,6 +24,7 @@
   "dependencies": {
     "@portabletext/react": "^8.0.1",
     "@sanity/image-url": "^2.1.1",
+    "gsap": "^3.15.0",
     "next": "^16.4.0",
     "next-sanity": "^13.3.4",
     "react": "^19.3.0",

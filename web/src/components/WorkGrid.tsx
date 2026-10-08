@@ -55,63 +55,68 @@ export function WorkGrid({
               />
             ) : (
               <div className={`work-cover work-cover-${index + 1}`}>
-                <Image
-                  src={images[key]}
-                  fill
-                  alt={name}
-                  sizes="(max-width: 600px) 92vw, (max-width: 1000px) 46vw, 24vw"
-                />
-                {index === 5 ? (
-                  <div className="travel-search" aria-hidden="true">
-                    <span>
-                      City
-                      <br />
-                      <strong>Rome</strong>
-                    </span>
-                    <span>
-                      Type of experience
-                      <br />
-                      <strong>Private Tours in the City</strong>
-                    </span>
-                    <span className="pill dark">Discover</span>
-                  </div>
-                ) : null}
-                {index === 13 ? (
-                  <>
-                    <Image
-                      className="work-layer-top"
-                      src={images.imgRectangle23}
-                      fill
-                      alt=""
-                      sizes="24vw"
-                    />
-                    <Image
-                      className="work-layer-bottom"
-                      src={images.imgRectangle22}
-                      fill
-                      alt=""
-                      sizes="24vw"
-                    />
-                  </>
-                ) : null}
-                {index === 14 ? (
-                  <>
-                    <Image
-                      className="work-layer-bottom"
-                      src={images.imgBilzig011}
-                      fill
-                      alt=""
-                      sizes="24vw"
-                    />
-                    <Image
-                      className="work-layer-logo"
-                      src={images.imgVector1}
-                      fill
-                      alt=""
-                      sizes="16vw"
-                    />
-                  </>
-                ) : null}
+                <div className="motion-visual">
+                  <Image
+                    src={images[key]}
+                    fill
+                    alt={name}
+                    sizes="(max-width: 600px) 92vw, (max-width: 1000px) 46vw, 24vw"
+                  />
+                  {index === 5 ? (
+                    <div className="travel-search" aria-hidden="true">
+                      <span>
+                        City
+                        <br />
+                        <strong>Rome</strong>
+                      </span>
+                      <span>
+                        Type of experience
+                        <br />
+                        <strong>Private Tours in the City</strong>
+                      </span>
+                      <span className="pill dark">Discover</span>
+                    </div>
+                  ) : null}
+                  {index === 13 ? (
+                    <>
+                      <Image
+                        className="work-layer-top"
+                        src={images.imgRectangle23}
+                        fill
+                        alt=""
+                        sizes="24vw"
+                      />
+                      <Image
+                        className="work-layer-bottom"
+                        src={images.imgRectangle22}
+                        fill
+                        alt=""
+                        sizes="24vw"
+                      />
+                    </>
+                  ) : null}
+                  {index === 14 ? (
+                    <>
+                      <Image
+                        className="work-layer-bottom"
+                        src={images.imgBilzig011}
+                        fill
+                        alt=""
+                        sizes="24vw"
+                      />
+                      <Image
+                        className="work-layer-logo"
+                        src={images.imgVector1}
+                        fill
+                        alt=""
+                        sizes="16vw"
+                      />
+                    </>
+                  ) : null}
+                </div>
+                <span className="card-cue" aria-hidden="true">
+                  ↗
+                </span>
               </div>
             )}
             <h2>{name}</h2>
@@ -129,7 +134,9 @@ export function WorkGrid({
         return (
           <article key={slug}>
             {project ? (
-              <Link href={`/${lang}/projects/${project.slug}`}>{body}</Link>
+              <Link data-motion-card href={`/${lang}/projects/${project.slug}`}>
+                {body}
+              </Link>
             ) : (
               body
             )}

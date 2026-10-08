@@ -1,4 +1,5 @@
 "use client";
+import { HoverLabel } from "./HoverLabel";
 import Link from "@/components/AppLink";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -97,11 +98,11 @@ export function Header({
         </nav>
         <div className="header-contact">
           <a className="pill dark" href={settings.callUrl}>
-            {t.call}
+            <HoverLabel>{t.call}</HoverLabel>
           </a>
           {settings.whatsappUrl ? (
             <a className="pill" href={settings.whatsappUrl}>
-              WhatsApp
+              <HoverLabel>WhatsApp</HoverLabel>
             </a>
           ) : null}
         </div>

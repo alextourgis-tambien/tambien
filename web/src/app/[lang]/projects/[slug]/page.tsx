@@ -1,3 +1,4 @@
+import { HoverLabel } from "@/components/HoverLabel";
 import { PageFade } from "@/components/PageFade";
 import Link from "@/components/AppLink";
 import { notFound } from "next/navigation";
@@ -49,7 +50,7 @@ export default async function Project({ params }: Props) {
             <p>{translate(project.description, lang)}</p>
             {project.website ? (
               <a className="pill" href={project.website}>
-                Website ↗
+                <HoverLabel>Website ↗</HoverLabel>
               </a>
             ) : null}
             {project.client ? <p>{project.client}</p> : null}
@@ -69,7 +70,7 @@ export default async function Project({ params }: Props) {
           <div className="project-grid">
             {related.map((item) => (
               <article key={item._id}>
-                <Link href={`/${lang}/projects/${item.slug}`}>
+                <Link data-motion-card href={`/${lang}/projects/${item.slug}`}>
                   <Media media={item.cover} lang={lang} />
                   <h3>{item.name}</h3>
                   <p>{translate(item.description, lang)}</p>
