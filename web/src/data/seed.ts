@@ -14,6 +14,38 @@ const media = (
   fr = en,
   es = en,
 ): Media => ({ src, width, height, alt: l(en, fr, es) });
+const processDescriptions: Record<string, ReturnType<typeof l>> = {
+  "kickoff": {
+    "fr": "Nous échangeons sur votre activité, votre public et vos ambitions pour poser un cadre commun. Ensemble, nous définissons les priorités, les attentes et les étapes qui guideront le projet.",
+    "en": "We discuss your business, audience, and ambitions to establish a shared starting point. Together, we define priorities, expectations, and the next steps so everyone knows where the project is heading.",
+    "es": "Hablamos de tu negocio, tu público y tus ambiciones para establecer un punto de partida común. Juntos definimos las prioridades, las expectativas y las etapas que guiarán el proyecto."
+  },
+  "branding": {
+    "fr": "Nous traduisons votre positionnement en une identité claire, des couleurs à la typographie. Un langage visuel cohérent donne du caractère à votre marque et la rend reconnaissable sur chaque support.",
+    "en": "We translate your positioning into a clear identity, from colors to typography. A consistent visual language gives your brand character and makes it recognizable wherever people encounter it.",
+    "es": "Traducimos tu posicionamiento en una identidad clara, desde los colores hasta la tipografía. Un lenguaje visual coherente da personalidad a tu marca y la hace reconocible en cada soporte."
+  },
+  "architecture": {
+    "fr": "Nous organisons vos contenus et dessinons des parcours adaptés aux besoins de votre public. Une navigation claire aide chacun à trouver les bonnes réponses et à passer naturellement à l’action.",
+    "en": "We organize your content and map journeys around your audience’s needs. Clear navigation helps people find the answers they are looking for and take the next step naturally, with confidence.",
+    "es": "Organizamos tus contenidos y trazamos recorridos adaptados a las necesidades de tu público. Una navegación clara ayuda a encontrar las respuestas adecuadas y a dar el siguiente paso con confianza."
+  },
+  "design": {
+    "fr": "Nous donnons vie à votre identité à travers les mises en page, la typographie et les interactions. Chaque détail associe caractère et lisibilité pour créer une expérience fluide et mémorable.",
+    "en": "We bring your identity to life through layouts, typography, and interactions. Every detail balances personality with clarity, creating an experience that feels intuitive to use and memorable to explore.",
+    "es": "Damos vida a tu identidad mediante la composición, la tipografía y las interacciones. Cada detalle combina personalidad y claridad para crear una experiencia intuitiva, agradable y memorable."
+  },
+  "development": {
+    "fr": "Nous transformons le design en un site rapide, soigné et adapté à tous les écrans. Une structure solide et des outils de gestion simples vous permettent de faire évoluer vos contenus au quotidien.",
+    "en": "We turn the design into a fast, polished website that works across screen sizes. A solid structure and straightforward editing tools make it easy for your team to manage content as your business evolves.",
+    "es": "Transformamos el diseño en una web rápida, cuidada y adaptada a todas las pantallas. Una estructura sólida y herramientas sencillas permiten a tu equipo gestionar los contenidos y hacerlos evolucionar."
+  },
+  "delivery": {
+    "fr": "Nous vérifions les derniers détails et vous accompagnons jusqu’à la mise en ligne. La prise en main du site et la formation vous donnent les repères nécessaires pour le gérer et préparer la suite.",
+    "en": "We check the final details and support you through launch. A practical handover and training give your team the knowledge to manage the website confidently, keep it up to date, and plan what comes next.",
+    "es": "Revisamos los últimos detalles y te acompañamos hasta el lanzamiento. La entrega y la formación dan a tu equipo las claves para gestionar la web con confianza, mantenerla al día y preparar la siguiente etapa."
+  }
+};
 const feed: FeedItem[] = [
   {
     _id: "table22",
@@ -568,6 +600,7 @@ export const seed: SiteContent = {
     })),
   ].map((step, index) => ({
     ...step,
+    description: processDescriptions[step._key] || step.description,
     media: ("media" in step ? step.media : undefined) || {
       ...projects[[0, 0, 1, 2, 3, 4, 5][index]].cover,
       alt: l(
