@@ -59,8 +59,17 @@ img {
 main {
   margin-inline: var(--margin);
 }
+.header-space {
+  height: 3.375rem;
+}
 .header {
-  margin: 0 var(--margin);
+  position: fixed;
+  inset: 0 var(--margin) auto;
+  z-index: 100;
+  margin: 0;
+  color: white;
+  mix-blend-mode: difference;
+  pointer-events: none;
   height: 3.375rem;
   padding-top: 0.8125rem;
   display: grid;
@@ -68,6 +77,25 @@ main {
   gap: var(--gutter);
   align-items: start;
   font-weight: 500;
+}
+.header .brand,
+.header-nav,
+.header-contact {
+  pointer-events: auto;
+}
+.header .brand img {
+  filter: invert(1);
+}
+.header .pill {
+  background: #0a0a0a;
+  color: white;
+}
+.header .pill.dark {
+  background: white;
+  color: black;
+}
+.header .menu-trigger:hover {
+  background: #151515;
 }
 .brand {
   display: flex;
@@ -731,6 +759,7 @@ main {
   body {
     font-size: 0.875rem;
   }
+  .header-space { height: 3.5rem; }
   .header {
     grid-template-columns: 1fr auto;
     min-height: 3.5rem;
@@ -1400,7 +1429,7 @@ html {
   scroll-behavior: smooth;
 }
 [id] {
-  scroll-margin-top: 1.5rem;
+  scroll-margin-top: 4.375rem;
 }
 .initial-loader,
 .route-loader {

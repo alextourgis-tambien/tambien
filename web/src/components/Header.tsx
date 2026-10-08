@@ -119,6 +119,7 @@ export function Header({
       <a className="skip-link" href="#content">
         {t.skip}
       </a>
+      <div className="header-space" aria-hidden="true" />
       <header className="header">
         <Link href={`/${lang}`} className="brand">
           <Image src={homeAssets.imgVector} width={21} height={19} alt="" />
