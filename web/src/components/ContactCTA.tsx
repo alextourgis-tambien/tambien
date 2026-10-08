@@ -8,9 +8,11 @@ import { useFollower } from "./useFollower";
 export function ContactCTA({
   lang,
   settings,
+  showMark = true,
 }: {
   lang: Language;
   settings: Settings;
+  showMark?: boolean;
 }) {
   const t = labels[lang];
   const { area, follower, move } = useFollower<HTMLAnchorElement>({
@@ -23,9 +25,11 @@ export function ContactCTA({
       className="contact-cta"
       aria-labelledby="contact-title"
     >
-      <div className="cta-mark">
-        <Image src={homeAssets.imgVector1} width={710} height={642} alt="" />
-      </div>
+      {showMark ? (
+        <div className="cta-mark">
+          <Image src={homeAssets.imgVector1} width={710} height={642} alt="" />
+        </div>
+      ) : null}
       <div className="cta-content">
         <h2 id="contact-title">
           {translate(settings.cta, lang)}

@@ -15,7 +15,11 @@ export function Footer({
   const t = labels[lang];
   return (
     <>
-      <ContactCTA lang={lang} settings={settings} />
+      <ContactCTA
+        lang={lang}
+        settings={settings}
+        showMark={!["/about", "/studio"].includes(path)}
+      />
       <footer className="footer">
         <nav aria-label="Footer">
           {[
