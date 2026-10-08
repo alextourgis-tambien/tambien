@@ -98,6 +98,15 @@ export type Page = {
   blocks?: ContentBlock[];
   seo?: Seo;
   status?: Localized;
+  resources?: Resource[];
+};
+export type Resource = {
+  _key: string;
+  name: string;
+  title: Localized;
+  category: Localized;
+  url: string;
+  media?: Media;
 };
 export type Settings = {
   siteName: string;

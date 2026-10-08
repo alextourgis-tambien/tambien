@@ -45,6 +45,7 @@ export const labels = {
     back: "Retour à l’accueil",
     videos: "Vidéos",
     clients: "Clients",
+    resources: "Ressources",
   },
   en: {
     home: "Home",
@@ -75,6 +76,7 @@ export const labels = {
     back: "Back to home",
     videos: "Video",
     clients: "Clients",
+    resources: "Resources",
   },
   es: {
     home: "Inicio",
@@ -105,5 +107,6 @@ export const labels = {
     back: "Volver al inicio",
     videos: "Vídeos",
     clients: "Clientes",
+    resources: "Recursos",
   },
 } as const;

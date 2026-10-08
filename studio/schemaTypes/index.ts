@@ -285,6 +285,7 @@ const project = defineType({
       validation: (r) => r.required(),
     }),
     blocks,
+
     field({
       name: "website",
       title: "Site du client",
@@ -356,6 +357,49 @@ const page = defineType({
       group: "content",
     }),
     blocks,
+    field({
+      name: "resources",
+      title: "Ressources",
+      type: "array",
+      group: "content",
+      of: [
+        member({
+          name: "resource",
+          type: "object",
+          fields: [
+            field({
+              name: "name",
+              title: "Nom",
+              type: "string",
+              validation: (r) => r.required(),
+            }),
+            field({
+              name: "title",
+              title: "Description courte",
+              type: "localized",
+            }),
+            field({ name: "category", title: "Catégorie", type: "localized" }),
+            field({
+              name: "url",
+              title: "Lien",
+              type: "string",
+              description:
+                "URL externe ou chemin interne, par exemple /tools/fluent.",
+              validation: (r) =>
+                r
+                  .required()
+                  .custom((value) =>
+                    !value || /^(https?:\/\/|\/[^/])/.test(value)
+                      ? true
+                      : "Utilisez un lien http(s) ou un chemin interne.",
+                  ),
+            }),
+            field({ name: "media", title: "Aperçu au survol", type: "media" }),
+          ],
+          preview: { select: { title: "name" } },
+        }),
+      ],
+    }),
   ],
   preview: { select: { title: "name" } },
 });

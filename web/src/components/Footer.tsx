@@ -28,6 +28,7 @@ export function Footer({
             ["studio", t.studio],
             ["pricing", t.pricing],
             ["event", t.event],
+            ["resources", t.resources],
             ["legals", t.legals],
           ].map(([url, title]) => (
             <Link key={url} href={`/${lang}${url ? "/" + url : ""}`}>
@@ -37,7 +38,6 @@ export function Footer({
           {settings.youtubeUrl ? (
             <a href={settings.youtubeUrl}>YouTube</a>
           ) : null}
-          {settings.toolsUrl ? <a href={settings.toolsUrl}>Tools</a> : null}
         </nav>
         <div className="footer-social">
           {settings.socials.map((social) => (

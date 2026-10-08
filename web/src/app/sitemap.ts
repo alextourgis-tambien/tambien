@@ -9,6 +9,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "",
     "/work",
     "/pricing",
+    "/resources",
+    "/tools/fluent",
     ...content.pages
       .filter((page) => !page.seo?.noIndex)
       .map((page) => `/${page.slug}`),

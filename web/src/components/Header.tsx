@@ -124,7 +124,7 @@ export function Header({
     },
     { title: "Youtube", url: settings.youtubeUrl || "" },
     { title: t.event, url: `/${lang}/event` },
-    { title: "Tools *(soon)", url: settings.toolsUrl || "" },
+    { title: t.resources, url: `/${lang}/resources` },
   ];
   return (
     <>
