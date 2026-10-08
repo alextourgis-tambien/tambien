@@ -42,6 +42,18 @@ export function Header({
       return;
     }
     const panel = dialog.current.querySelector(".menu-panel")!;
+    panel
+      .querySelectorAll("nav > * > span, nav > * > small, .menu-languages > *")
+      .forEach((node) => {
+        const text = getComputedStyle(node);
+        node.animate(
+          [
+            { opacity: text.opacity, transform: text.transform },
+            { opacity: 0, transform: "translateY(-3px)" },
+          ],
+          { duration: 120, easing: "ease-in", fill: "forwards" },
+        );
+      });
     const appearance = getComputedStyle(panel);
     closing.current = panel.animate(
       [
@@ -93,7 +105,7 @@ export function Header({
     } else {
       dialog.current?.close();
       dialog.current
-        ?.querySelectorAll(".menu-panel, .menu-plus")
+        ?.querySelectorAll(".menu-panel, .menu-panel *")
         .forEach((node) =>
           node.getAnimations().forEach((animation) => animation.cancel()),
         );
