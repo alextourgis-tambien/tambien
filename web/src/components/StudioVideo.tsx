@@ -6,10 +6,12 @@ export function StudioVideo({
   url,
   poster,
   label,
+  parallax = true,
 }: {
   url?: string;
   poster?: string;
   label: string;
+  parallax?: boolean;
 }) {
   const video = useRef<HTMLVideoElement>(null);
   const wrapper = useRef<HTMLDivElement>(null);
@@ -24,6 +26,10 @@ export function StudioVideo({
       "(min-width: 700px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)",
     );
     if (motion.matches) void video.current?.play().catch(() => {});
+    if (!parallax) {
+      const pointerState = pointer.current;
+      return () => cancelAnimationFrame(pointerState.frame);
+    }
     let frame = 0;
     let offset = 0;
     let target = 0;
@@ -60,7 +66,7 @@ export function StudioVideo({
       cancelAnimationFrame(frame);
       cancelAnimationFrame(pointerState.frame);
     };
-  }, []);
+  }, [parallax]);
   const hideCue = () => {
     if (cue.current) cue.current.dataset.visible = "false";
     cancelAnimationFrame(pointer.current.frame);

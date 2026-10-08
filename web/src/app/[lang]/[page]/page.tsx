@@ -164,11 +164,22 @@ export default async function Page({ params }: Props) {
             </div>
             <div>
               {data.videoUrl ? (
-                <Video
-                  url={data.videoUrl}
-                  title={translate(data.title, lang)}
-                  poster={data.media?.src}
-                />
+                /^https?:\/\/[^?#]+\.mp4(?:[?#]|$)/i.test(data.videoUrl) ? (
+                  <div className="event-video">
+                    <StudioVideo
+                      url={data.videoUrl}
+                      poster={data.media?.src}
+                      label={t.play}
+                      parallax={false}
+                    />
+                  </div>
+                ) : (
+                  <Video
+                    url={data.videoUrl}
+                    title={translate(data.title, lang)}
+                    poster={data.media?.src}
+                  />
+                )
               ) : data.media ? (
                 <Media media={data.media} lang={lang} priority />
               ) : null}
