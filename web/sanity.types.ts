@@ -288,6 +288,8 @@ export type Project = {
       _key: string;
     } & ServiceReference
   >;
+  workCover?: Media;
+  workPosition?: number;
   cover?: Media;
   blocks?: Array<
     {
@@ -576,6 +578,8 @@ export type SITE_QUERY_RESULT = {
     client?: string;
     year?: number;
     services: Array<null> | ArrayOf<Localized> | null;
+    workCover?: Media;
+    workPosition?: number;
     cover?: Media;
     blocks?: Array<
       {

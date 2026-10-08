@@ -357,7 +357,7 @@ export const seed: SiteContent = {
     ),
     cta: l(
       "Make your move today,",
-      "Da el primer paso hoy,",
+      "Passez à l’action aujourd’hui,",
       "Da el primer paso hoy,",
     ),
     ctaSecondary: l(
@@ -536,7 +536,17 @@ export const seed: SiteContent = {
       description: l(den, dfr, des),
       time: l("Day " + day, "Jour " + day, "Día " + day),
     })),
-  ],
+  ].map((step, index) => ({
+    ...step,
+    media: ("media" in step ? step.media : undefined) || {
+      ...projects[[0, 0, 1, 2, 3, 4, 5][index]].cover,
+      alt: l(
+        "Temporary process illustration",
+        "Illustration provisoire de cette étape",
+        "Ilustración provisional de esta etapa",
+      ),
+    },
+  })),
   testimonials: [],
   offers: [
     {

@@ -98,5 +98,9 @@ export const getContent = cache(async (): Promise<SiteContent> => {
       services: normalized.services || seed.settings.services,
     },
     feed,
+    process: (normalized.process || seed.process).map((step, index) => ({
+      ...step,
+      media: step.media || seed.process[index]?.media,
+    })),
   };
 });

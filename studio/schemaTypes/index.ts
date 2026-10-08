@@ -261,6 +261,23 @@ const project = defineType({
       of: [member({ type: "reference", to: [{ type: "service" }] })],
     }),
     field({
+      name: "workCover",
+      title: "Visuel de la grille Work",
+      type: "media",
+      group: "content",
+      description:
+        "Format portrait 348 × 422. Distinct du visuel utilisé sur l’accueil.",
+    }),
+    field({
+      name: "workPosition",
+      title: "Position dans la grille Work",
+      type: "number",
+      group: "content",
+      validation: (r) => r.integer().min(1).max(16),
+      description:
+        "1 à 16, de gauche à droite. Permet de remplacer une carte provisoire.",
+    }),
+    field({
       name: "cover",
       title: "Image de couverture",
       type: "media",

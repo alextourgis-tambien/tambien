@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { labels, languages, type Language } from "@/lib/i18n";
+import { labels, type Language } from "@/lib/i18n";
 import type { Settings } from "@/lib/types";
 import { homeAssets } from "@/data/seed";
 export function Header({
@@ -36,6 +36,11 @@ export function Header({
   }, [lang]);
   useEffect(() => {
     if (open) {
+      const box = trigger.current?.getBoundingClientRect();
+      if (box && dialog.current) {
+        dialog.current.style.left = `${Math.max(16, box.right - (225 * parseFloat(getComputedStyle(document.documentElement).fontSize)) / 16)}px`;
+        dialog.current.style.top = `${box.bottom + 10}px`;
+      }
       dialog.current?.showModal();
       document.body.style.overflow = "hidden";
     } else {
@@ -50,15 +55,13 @@ export function Header({
     { title: t.work, url: `/${lang}/work` },
     { title: t.studio, url: `/${lang}/studio` },
     { title: t.services, url: `/${lang}/studio#services` },
-    { title: t.pricing, url: `/${lang}/pricing` },
-    ...(settings.email
-      ? [{ title: "Email", url: `mailto:${settings.email}` }]
-      : []),
-    ...(settings.youtubeUrl
-      ? [{ title: "YouTube", url: settings.youtubeUrl }]
-      : []),
+    {
+      title: "Email us",
+      url: settings.email ? `mailto:${settings.email}` : "",
+    },
+    { title: "Youtube", url: settings.youtubeUrl || "" },
     { title: t.event, url: `/${lang}/event` },
-    ...(settings.toolsUrl ? [{ title: "Tools", url: settings.toolsUrl }] : []),
+    { title: "Tools *(soon)", url: settings.toolsUrl || "" },
   ];
   return (
     <>
@@ -84,7 +87,12 @@ export function Header({
             aria-expanded={open}
             aria-controls="site-menu"
           >
-            +
+            <Image
+              src={homeAssets.imgFrame37597}
+              width={37}
+              height={26}
+              alt=""
+            />
           </button>
         </nav>
         <div className="header-contact">
@@ -113,37 +121,60 @@ export function Header({
       >
         <div className="menu-panel">
           <button
-            className="pill menu-close"
+            className="pill menu-trigger menu-close"
             aria-label={t.close}
             onClick={() => setOpen(false)}
           >
-            ×
+            <Image
+              src={homeAssets.imgFrame37597}
+              width={37}
+              height={26}
+              alt=""
+            />
           </button>
           <nav aria-label={t.menu}>
-            {entries.map((entry, index) => (
-              <Link
-                key={entry.url}
-                href={entry.url}
-                onClick={() => setOpen(false)}
-              >
-                <span>{entry.title}</span>
-                <small>{String(index + 1).padStart(2, "0")}</small>
-              </Link>
-            ))}
+            {entries.map((entry, index) => {
+              const children = (
+                <>
+                  <span>{entry.title}</span>
+                  <small>{String(index + 1).padStart(2, "0")}</small>
+                </>
+              );
+              return entry.url ? (
+                <Link
+                  key={index}
+                  href={entry.url}
+                  onClick={() => setOpen(false)}
+                >
+                  {children}
+                </Link>
+              ) : (
+                <span
+                  key={index}
+                  className="menu-unavailable"
+                  aria-disabled="true"
+                >
+                  {children}
+                </span>
+              );
+            })}
           </nav>
-          <div className="language-links">
-            {languages.map((language) => (
-              <Link
-                key={language}
-                href={pathname.replace(/^\/(fr|en|es)/, `/${language}`)}
-                hrefLang={language}
-                lang={language}
-                aria-current={language === lang ? "true" : undefined}
-                onClick={() => setOpen(false)}
-              >
-                {language.toUpperCase()}
-              </Link>
-            ))}
+          <div className="menu-languages">
+            <div className="language-links">
+              {(["en", "fr", "es"] as Language[]).map((language) => (
+                <Link
+                  key={language}
+                  href={pathname.replace(/^\/(fr|en|es)/, `/${language}`)}
+                  hrefLang={language}
+                  lang={language}
+                  aria-current={language === lang ? "true" : undefined}
+                  onClick={() => setOpen(false)}
+                >
+                  {language.toUpperCase()}
+                </Link>
+              ))}
+            </div>
+            <small>08</small>
           </div>
         </div>
       </dialog>

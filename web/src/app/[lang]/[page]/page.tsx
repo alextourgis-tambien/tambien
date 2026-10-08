@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { isLanguage, labels, translate } from "@/lib/i18n";
@@ -7,8 +6,10 @@ import { metadata } from "@/lib/seo";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Media } from "@/components/Media";
-import { Blocks, Video } from "@/components/Blocks";
+import { Blocks } from "@/components/Blocks";
 import { homeAssets } from "@/data/seed";
+import { WorkGrid, workCardCount } from "@/components/WorkGrid";
+import { StudioVideo } from "@/components/StudioVideo";
 type Props = { params: Promise<{ lang: string; page: string }> };
 export async function generateMetadata({ params }: Props) {
   const { lang, page } = await params;
@@ -42,19 +43,9 @@ export default async function Page({ params }: Props) {
         {page === "work" ? (
           <>
             <h1 className="work-title">
-              {t.selected} <span>({content.projects.length})</span>
+              {t.selected} <span>({workCardCount})</span>
             </h1>
-            <div className="project-grid">
-              {content.projects.map((project) => (
-                <article key={project._id}>
-                  <Link href={`/${lang}/projects/${project.slug}`}>
-                    <Media media={project.cover} lang={lang} />
-                    <h2>{project.name}</h2>
-                    <p>{translate(project.description, lang)}</p>
-                  </Link>
-                </article>
-              ))}
-            </div>
+            <WorkGrid projects={content.projects} lang={lang} />
           </>
         ) : null}
         {page === "pricing" ? (
@@ -96,12 +87,11 @@ export default async function Page({ params }: Props) {
             <section className="studio-hero">
               <h1>{translate(data.title, lang)}</h1>
               <div className="studio-portrait">
-                {data.media ? (
-                  <Media media={data.media} lang={lang} priority />
-                ) : null}
-                {data.videoUrl ? (
-                  <Video url={data.videoUrl} title={t.play} />
-                ) : null}
+                <StudioVideo
+                  url={data.videoUrl}
+                  poster={data.media?.src}
+                  label={t.play}
+                />
               </div>
               <div className="studio-mark">
                 <Image
@@ -134,18 +124,28 @@ export default async function Page({ params }: Props) {
                   ))}
                 </ul>
               </div>
-              {settings.videos.length ? (
+              {
                 <div>
                   <h2>{t.videos}</h2>
                   <ul>
-                    {settings.videos.map((item) => (
-                      <li key={item.url}>
-                        <a href={item.url}>{translate(item.title, lang)}</a>
+                    {(settings.videos.length
+                      ? settings.videos
+                      : Array.from({ length: 7 }, (_, index) => ({
+                          title: {
+                            fr: `Vidéo ${index + 1} — Lorem ipsum dolor sit amet`,
+                            en: `Video ${index + 1} — Lorem ipsum dolor sit amet`,
+                            es: `Vídeo ${index + 1} — Lorem ipsum dolor sit amet`,
+                          },
+                          url: "https://www.youtube.com/",
+                        }))
+                    ).map((item, index) => (
+                      <li key={index}>
+                        <a href={item.url}>{translate(item.title, lang)} ↗</a>
                       </li>
                     ))}
                   </ul>
                 </div>
-              ) : null}
+              }
             </section>
             {data.blocks ? <Blocks blocks={data.blocks} lang={lang} /> : null}
           </>

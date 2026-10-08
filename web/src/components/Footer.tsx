@@ -1,8 +1,8 @@
 import Link from "next/link";
-import Image from "next/image";
-import { labels, languages, translate, type Language } from "@/lib/i18n";
+import { ContactCTA } from "./ContactCTA";
+import { labels, languages, type Language } from "@/lib/i18n";
 import type { Settings } from "@/lib/types";
-import { homeAssets } from "@/data/seed";
+
 export function Footer({
   lang,
   settings,
@@ -15,36 +15,7 @@ export function Footer({
   const t = labels[lang];
   return (
     <>
-      <section className="contact-cta" aria-labelledby="contact-title">
-        <div className="cta-mark">
-          <Image src={homeAssets.imgVector1} width={710} height={642} alt="" />
-        </div>
-        <div className="cta-content">
-          <h2 id="contact-title">
-            {translate(settings.cta, lang)}
-            <br />
-            <span>{translate(settings.ctaSecondary, lang)}</span>
-          </h2>
-          <div className="cta-actions">
-            <a href={settings.callUrl}>{t.call}</a>
-            {settings.whatsappUrl ? (
-              <a href={settings.whatsappUrl}>WhatsApp</a>
-            ) : null}
-            <a className="founder" href={settings.callUrl}>
-              <Image
-                src={homeAssets.imgRectangle2}
-                width={42}
-                height={42}
-                alt="Alex"
-              />
-              <span>
-                <strong>{t.contact}</strong>
-                <span>{t.founder}</span>
-              </span>
-            </a>
-          </div>
-        </div>
-      </section>
+      <ContactCTA lang={lang} settings={settings} />
       <footer className="footer">
         <nav aria-label="Footer">
           {[

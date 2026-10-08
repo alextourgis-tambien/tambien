@@ -68,10 +68,11 @@ Pour la prévisualisation des brouillons, configurer un token de lecture serveur
 ## Contenus à finaliser avant publication
 
 - Destinations WhatsApp, YouTube, Tools et réseaux sociaux.
-- Galeries et textes définitifs des projets : le portfolio contient uniquement les neuf projets identifiables depuis les textes fournis, sans inventer les projets des autres visuels.
+- Galeries et textes définitifs des projets : la grille reproduit les 16 visuels de Figma, avec les neuf projets identifiés et des libellés provisoires pour les autres. Les champs « Visuel de la grille Work » et « Position dans la grille Work » permettent de remplacer ces cartes dans Sanity.
 - Témoignages qui citent « Before Tomorrow » : citations anglaises conservées, à valider avec les auteurs avant publication.
 - Tarifs et durées : la fourchette de l’accueil, le calendrier et les offres restent à harmoniser ; « 18k–23k+ » est conservé tel que fourni.
-- Vidéo Studio, liste de vidéos, informations légales validées.
+- Vidéo Studio provisoire fournie par Alex intégrée (boucle muette de 10 secondes, lecture complète au clic). Liste YouTube avec sept liens et titres provisoires à remplacer ; informations légales à valider.
+- Illustrations des étapes provisoires lorsque le champ média est vide ; renseigner les visuels définitifs dans chaque étape Sanity.
 
 Le site de travail reste `noindex` et son sitemap est vide tant que `SITE_INDEXABLE` n’est pas `true`. Activer l’indexation seulement après validation du contenu. Les pages projets et légales ont aussi un réglage SEO indépendant.
 

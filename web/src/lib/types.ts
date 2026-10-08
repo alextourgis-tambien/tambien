@@ -43,6 +43,8 @@ export type Project = {
   title: Localized;
   description: Localized;
   cover: Media;
+  workCover?: Media;
+  workPosition?: number;
   blocks: ContentBlock[];
   website?: string;
   seo?: Seo;
