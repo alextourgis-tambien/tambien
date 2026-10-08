@@ -1664,3 +1664,35 @@ html {
 @media (min-width: 1001px) {
   .hero-ending { display: block; }
 }
+
+.process-disclosure { display: none; }
+@media (max-width: 1000px), (pointer: coarse) {
+  .process-summary > span:first-child {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .process-disclosure {
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0.25rem;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #f5f5f5;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+  }
+  .process-disclosure-vertical {
+    transform-origin: 8px 8px;
+    transition: transform 180ms ease;
+  }
+  .process-summary[aria-expanded="true"] .process-disclosure-vertical {
+    transform: scaleY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .process-disclosure-vertical { transition: none; }
+}

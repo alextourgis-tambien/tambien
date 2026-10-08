@@ -49,7 +49,13 @@ export function Process({
                 setExpanded(expanded === step._key ? null : step._key)
               }
             >
-              <span>{translate(step.title, lang)}</span>
+              <span>
+                {translate(step.title, lang)}
+                <svg className="process-disclosure" viewBox="0 0 16 16" aria-hidden="true">
+                  <path d="M3 8h10" />
+                  <path className="process-disclosure-vertical" d="M8 3v10" />
+                </svg>
+              </span>
               <span>{translate(step.summary, lang)}</span>
               <span>{translate(step.time, lang)}</span>
             </button>
