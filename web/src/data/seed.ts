@@ -393,9 +393,9 @@ export const seed: SiteContent = {
       "antes de que empiece mañana.",
     ),
     processIntro: l(
-      "Great websites do more than look good. They build trust, drive growth, and create opportunities.",
-      "Un beau site ne suffit pas. Il doit inspirer confiance, soutenir la croissance et créer des opportunités.",
-      "Una gran web hace más que verse bien. Genera confianza, impulsa el crecimiento y crea oportunidades.",
+      "Great websites do more than look good.\nThey build trust, drive growth, and create opportunities.",
+      "Un beau site ne suffit pas.\nIl doit inspirer confiance, soutenir la croissance et créer des opportunités.",
+      "Una gran web hace más que verse bien.\nGenera confianza, impulsa el crecimiento y crea oportunidades.",
     ),
     processSubline: l(
       "Most projects range from €7k to €23k.",
@@ -744,6 +744,8 @@ export const seed: SiteContent = {
     {
       _id: "event",
       slug: "event",
+      videoUrl:
+        "https://player.vimeo.com/progressive_redirect/playback/1234080464/rendition/720p/file.mp4%20%28720p%29.mp4?loc=external&signature=c6e90b27eeb6cfc8f0b2567923c189e06de4b4095d776e22225c4e7971aaf7af",
       title: l(
         "Creative events for people building what comes next",
         "Des événements créatifs pour celles et ceux qui construisent la suite",

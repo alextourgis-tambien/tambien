@@ -205,6 +205,9 @@ main {
   line-height: 1.12;
   margin-bottom: 5.9375rem;
 }
+.process-intro h2 {
+  white-space: pre-line;
+}
 .process-intro p {
   color: #888;
 }

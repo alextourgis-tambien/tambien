@@ -8,7 +8,7 @@ import { metadata } from "@/lib/seo";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Media } from "@/components/Media";
-import { Blocks } from "@/components/Blocks";
+import { Blocks, Video } from "@/components/Blocks";
 import { homeAssets } from "@/data/seed";
 import { WorkGrid } from "@/components/WorkGrid";
 import { StudioVideo } from "@/components/StudioVideo";
@@ -163,7 +163,13 @@ export default async function Page({ params }: Props) {
               <strong>{translate(data.status, lang) || t.soon}</strong>
             </div>
             <div>
-              {data.media ? (
+              {data.videoUrl ? (
+                <Video
+                  url={data.videoUrl}
+                  title={translate(data.title, lang)}
+                  poster={data.media?.src}
+                />
+              ) : data.media ? (
                 <Media media={data.media} lang={lang} priority />
               ) : null}
               {data.blocks ? <Blocks blocks={data.blocks} lang={lang} /> : null}

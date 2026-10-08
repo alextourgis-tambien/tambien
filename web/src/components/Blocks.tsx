@@ -18,7 +18,27 @@ function embedUrl(value: string) {
   } catch {}
   return null;
 }
-export function Video({ url, title }: { url: string; title: string }) {
+export function Video({
+  url,
+  title,
+  poster,
+}: {
+  url: string;
+  title: string;
+  poster?: string;
+}) {
+  if (/^https?:\/\/[^?#]+\.mp4(?:[?#]|$)/i.test(url))
+    return (
+      <video
+        className="video"
+        src={url}
+        poster={poster}
+        controls
+        playsInline
+        preload="metadata"
+        aria-label={title}
+      />
+    );
   const source = embedUrl(url);
   return source ? (
     <iframe
