@@ -376,6 +376,8 @@ export const seed: SiteContent = {
   settings: {
     siteName: "También",
     callUrl: "https://calendly.com/alextourgis/30min",
+    email: "alex@wearetambien.com",
+    youtubeUrl: "https://www.youtube.com/@alextourgis",
     socials: [],
     hero: l(
       "También partners with ambitious founders to build high-performing brands and websites that become the first choice in their industry, through Branding, Website, and SEO.",
