@@ -6,6 +6,7 @@ import { isLanguage, labels, translate } from "@/lib/i18n";
 import { getContent } from "@/lib/content";
 import { metadata } from "@/lib/seo";
 import { Header } from "@/components/Header";
+import { HoverLabel } from "@/components/HoverLabel";
 import { Footer } from "@/components/Footer";
 import { Media } from "@/components/Media";
 import { Blocks, Video } from "@/components/Blocks";
@@ -143,7 +144,9 @@ export default async function Page({ params }: Props) {
                         }))
                     ).map((item, index) => (
                       <li key={index}>
-                        <a href={item.url}>{translate(item.title, lang)} ↗</a>
+                        <a href={item.url}>
+                          <HoverLabel>{translate(item.title, lang)}</HoverLabel>
+                        </a>
                       </li>
                     ))}
                   </ul>
