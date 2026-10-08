@@ -55,7 +55,7 @@ Les tests navigateur vérifient plusieurs largeurs intermédiaires, les pages FR
 
 Portfolio : les 16 visuels de Figma sont présents, avec 12 projets identifiés et accessibles. Les positions 8, 10, 14 et 16 attendent encore leurs noms ; Figma utilise le titre provisoire « Table 22 ». Les projets supplémentaires de Sanity s’ajoutent à la grille, et son compteur suit le nombre de cartes affichées. `web/scripts/import-work-projects.mjs` ajoute uniquement les nouveaux projets en brouillon, sans remplacer les contenus édités.
 
-Aperçu validé : https://tambien-6t528izcv-alextourgis-6133.vercel.app/fr. Le projet Vercel `tambien` est dans l’espace personnel `alextourgis-6133`. Le code est sur la branche `codex/website-foundation`. Pour activer les déploiements Git automatiques, ajouter le compte GitHub También aux Login Connections de Vercel, puis connecter ce repository dans les réglages Git du projet.
+Aperçu validé : https://tambien-drm78xjrk-alextourgis-6133.vercel.app/fr. Le projet Vercel `tambien` est dans l’espace personnel `alextourgis-6133`. Le code est sur la branche `codex/website-foundation`. Pour activer les déploiements Git automatiques, ajouter le compte GitHub También aux Login Connections de Vercel, puis connecter ce repository dans les réglages Git du projet.
 
 Dans Vercel, importer `alextourgis-tambien/tambien` et choisir **Root Directory : web**. Utiliser les variables de `web/.env.example`, avec la vraie URL dans `NEXT_PUBLIC_SITE_URL`. Les branches produisent les aperçus ; `main` est la branche de production.
 
@@ -83,3 +83,5 @@ Le site de travail reste `noindex` et son sitemap est vide tant que `SITE_INDEXA
 Conserver les composants et tokens existants. La grille desktop s’appuie sur la référence Figma 1512 px, marges 30 et gouttières 20 ; les tailles utilisent des rem et une racine bornée. Les adaptations à deux colonnes et une colonne sont structurelles. ABC Diatype Regular / Medium / Bold est chargée localement via `next/font`.
 
 Le chargement initial et les navigations utilisent un loader discret et un fondu blanc de 320 ms via React ViewTransition. Le scroll reste natif ; les ancres utilisent le lissage du navigateur, avec désactivation en mode « réduire les animations ». Aucun moteur de scroll ni boucle JavaScript supplémentaire n’est ajouté.
+
+Images : les 48 sources raster locales sont en WebP (8,8 Mo au total au lieu de 115 Mo), avec une dimension maximale de 2 560 px. Les SVG restent vectoriels. Next.js génère les tailles adaptées, et les images Sanity sont également demandées en WebP. Les portraits et visuels informatifs ont des textes alternatifs ; les éléments décoratifs gardent un alt vide.
