@@ -37,7 +37,7 @@ export default async function Home({
   const content = await getContent();
   const { settings } = content;
   const hero = translate(settings.hero, lang);
-  const heroParts = hero.match(/^(.*?)(through |grâce au |a través del )(Branding.*)$/su);
+  const heroParts = hero.match(/^([\s\S]*?)(through |grâce au |a través del )(Branding[\s\S]*)$/u);
   return (
     <PageFade key={lang}>
       <Header lang={lang} settings={settings} />
