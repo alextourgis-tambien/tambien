@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test("button reveal keeps its size and accessible label, then returns to rest", async ({
+test("button cue keeps its size and accessible label, then returns to rest", async ({
   page,
 }) => {
   await page.goto("/fr/work");
@@ -12,17 +12,18 @@ test("button reveal keeps its size and accessible label, then returns to rest", 
   await expect
     .poll(() =>
       track.evaluate(
-        (el) => new DOMMatrixReadOnly(getComputedStyle(el).transform).m42,
+        (el) => new DOMMatrixReadOnly(getComputedStyle(el).transform).m41,
       ),
     )
-    .toBeLessThan(-5);
+    .toBeLessThan(-2.9);
+  await expect(button.locator(".hover-label-cue")).toHaveCSS("opacity", "0.85");
   await expect(button).toHaveCSS("text-decoration-line", "none");
   expect(await button.boundingBox()).toEqual(box);
   await page.mouse.move(0, 0);
   await expect
     .poll(() =>
       track.evaluate(
-        (el) => new DOMMatrixReadOnly(getComputedStyle(el).transform).m42,
+        (el) => new DOMMatrixReadOnly(getComputedStyle(el).transform).m41,
       ),
     )
     .toBe(0);
@@ -30,10 +31,10 @@ test("button reveal keeps its size and accessible label, then returns to rest", 
   await expect
     .poll(() =>
       track.evaluate(
-        (el) => new DOMMatrixReadOnly(getComputedStyle(el).transform).m42,
+        (el) => new DOMMatrixReadOnly(getComputedStyle(el).transform).m41,
       ),
     )
-    .toBeLessThan(-5);
+    .toBeLessThan(-2.9);
 });
 
 test("home and Work card visuals reveal without moving titles or leaving stale motion", async ({

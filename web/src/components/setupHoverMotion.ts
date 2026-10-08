@@ -31,10 +31,18 @@ export function setupHoverMotion(root: HTMLElement) {
         if (!label) return;
         const timeline = gsap.timeline({ paused: true });
         timeline.to(label, {
-          yPercent: -50,
-          duration: 0.48,
-          ease: "power3.inOut",
+          x: -3,
+          duration: 0.35,
+          ease: "power2.out",
         });
+        const cue = element.querySelector<HTMLElement>(".hover-label-cue");
+        if (cue)
+          timeline.fromTo(
+            cue,
+            { opacity: 0, x: -3 },
+            { opacity: 0.85, x: 0, duration: 0.3, ease: "power2.out" },
+            0.04,
+          );
         bind(element, timeline);
       });
       root

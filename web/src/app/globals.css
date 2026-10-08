@@ -1456,17 +1456,30 @@ html {
   pointer-events: none;
 }
 
-/* Labels reveal their second line without changing the button's dimensions. */
+/* A small directional cue, with stable button dimensions and readable text. */
 .hover-label {
+  position: relative;
   display: inline-block;
   height: 1.2em;
   line-height: 1.2;
-  overflow: hidden;
   vertical-align: middle;
 }
-.hover-label-track,
-.hover-label-track > span {
+.hover-label-track {
   display: block;
+}
+.hover-label-cue {
+  display: none;
+  position: absolute;
+  left: calc(100% + 0.1em);
+  top: 0.1em;
+  font-size: 0.75em;
+  opacity: 0;
+  pointer-events: none;
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .hover-label-cue {
+    display: block;
+  }
 }
 .motion-visual {
   position: absolute;
