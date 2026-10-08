@@ -2,6 +2,7 @@ import Link from "@/components/AppLink";
 import { labels, translate, type Language } from "@/lib/i18n";
 import type { FeedItem, Settings } from "@/lib/types";
 import { Media } from "./Media";
+import { FeedParallax } from "./FeedParallax";
 export function Feed({
   items,
   lang,
@@ -12,7 +13,7 @@ export function Feed({
   settings: Settings;
 }) {
   return (
-    <div className="feed-grid">
+    <FeedParallax>
       {[0, 1, 2, 3].map((column) => (
         <div className="feed-column" key={column}>
           {items
@@ -58,6 +59,6 @@ export function Feed({
             })}
         </div>
       ))}
-    </div>
+    </FeedParallax>
   );
 }
