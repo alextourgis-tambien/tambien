@@ -1,3 +1,4 @@
+import { PageFade } from "@/components/PageFade";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { isLanguage, translate } from "@/lib/i18n";
@@ -36,7 +37,7 @@ export default async function Home({
   const content = await getContent();
   const { settings } = content;
   return (
-    <>
+    <PageFade key={lang}>
       <Header lang={lang} settings={settings} />
       <main id="content">
         <section className="hero">
@@ -106,6 +107,6 @@ export default async function Home({
           inLanguage: ["fr", "en", "es"],
         }}
       />
-    </>
+    </PageFade>
   );
 }

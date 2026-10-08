@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/AppLink";
 import { Media } from "./Media";
 import assets from "@/data/assets.json";
 import { translate, type Language } from "@/lib/i18n";

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/AppLink";
 import { ContactCTA } from "./ContactCTA";
 import { labels, languages, type Language } from "@/lib/i18n";
 import type { Settings } from "@/lib/types";

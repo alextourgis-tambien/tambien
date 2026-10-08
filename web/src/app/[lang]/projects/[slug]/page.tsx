@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { PageFade } from "@/components/PageFade";
+import Link from "@/components/AppLink";
 import { notFound } from "next/navigation";
 import { isLanguage, labels, translate } from "@/lib/i18n";
 import { getContent } from "@/lib/content";
@@ -38,7 +39,7 @@ export default async function Project({ params }: Props) {
     )
     .slice(0, 4);
   return (
-    <>
+    <PageFade key={`${lang}/projects/${slug}`}>
       <Header lang={lang} settings={settings} />
       <main id="content" className="page">
         <article className="editorial case-study">
@@ -105,6 +106,6 @@ export default async function Project({ params }: Props) {
           ],
         }}
       />
-    </>
+    </PageFade>
   );
 }

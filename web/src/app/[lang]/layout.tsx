@@ -1,3 +1,4 @@
+import { InitialLoader } from "@/components/Loader";
 import localFont from "next/font/local";
 import { notFound } from "next/navigation";
 import { draftMode } from "next/headers";
@@ -27,8 +28,13 @@ export default async function Layout({
   const { lang } = await params;
   if (!isLanguage(lang)) notFound();
   return (
-    <html lang={lang} className={diatype.variable}>
+    <html
+      data-scroll-behavior="smooth"
+      lang={lang}
+      className={diatype.variable}
+    >
       <body>
+        <InitialLoader />
         {children}
         <SanityLive />
         {(await draftMode()).isEnabled ? <VisualEditing /> : null}

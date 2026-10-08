@@ -1,3 +1,4 @@
+import { PageFade } from "@/components/PageFade";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { isLanguage, labels, translate } from "@/lib/i18n";
@@ -37,7 +38,7 @@ export default async function Page({ params }: Props) {
   const data = content.pages.find((item) => item.slug === page);
   if (!data && !["pricing", "work"].includes(page)) notFound();
   return (
-    <>
+    <PageFade key={`${lang}/${page}`}>
       <Header lang={lang} settings={settings} />
       <main id="content" className={`page page-${page}`}>
         {page === "work" ? (
@@ -181,6 +182,6 @@ export default async function Page({ params }: Props) {
       {page !== "work" ? (
         <Footer lang={lang} settings={settings} path={`/${page}`} />
       ) : null}
-    </>
+    </PageFade>
   );
 }

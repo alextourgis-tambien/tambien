@@ -1309,3 +1309,119 @@ a:hover .media img {
   top: 50%;
   transform: translate(-50%, -50%);
 }
+/* The browser composites these opacity fades; scrolling remains native. */
+html {
+  scroll-behavior: smooth;
+}
+[id] {
+  scroll-margin-top: 1.5rem;
+}
+.initial-loader,
+.route-loader {
+  background: #fff;
+  display: grid;
+  place-items: center;
+}
+.initial-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  pointer-events: none;
+  opacity: 1;
+  animation: loader-dismiss 240ms linear 80ms forwards;
+}
+@keyframes loader-dismiss {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+.route-loader {
+  min-height: 100svh;
+}
+.loader-mark {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-weight: 500;
+}
+.loader-dot {
+  animation: loader-pulse 800ms linear infinite alternate;
+}
+@keyframes loader-pulse {
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
+  }
+}
+::view-transition {
+  background: #fff;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  opacity: 0;
+}
+::view-transition-group(.page-fade) {
+  animation: none;
+}
+::view-transition-old(.page-fade) {
+  mix-blend-mode: normal;
+  animation: page-out 140ms linear both;
+}
+::view-transition-new(.page-fade) {
+  mix-blend-mode: normal;
+  animation: page-in 180ms linear 140ms both;
+}
+@keyframes page-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes page-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .initial-loader {
+    display: none;
+  }
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+  ::view-transition-old(.page-fade) {
+    opacity: 0;
+  }
+  ::view-transition-new(.page-fade) {
+    opacity: 1;
+  }
+}
+.navigation-loader {
+  position: fixed;
+  bottom: 1.5rem;
+  right: var(--margin);
+  z-index: 10000;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius);
+  background: #fff;
+  box-shadow: 0 0 0 1px #eee;
+  animation: page-in 140ms linear both;
+  pointer-events: none;
+}

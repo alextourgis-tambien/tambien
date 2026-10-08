@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/AppLink";
 import { labels, translate, type Language } from "@/lib/i18n";
 import type { FeedItem, Settings } from "@/lib/types";
 import { Media } from "./Media";

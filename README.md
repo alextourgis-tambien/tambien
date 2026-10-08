@@ -79,3 +79,5 @@ Le site de travail reste `noindex` et son sitemap est vide tant que `SITE_INDEXA
 ## Modifications futures
 
 Conserver les composants et tokens existants. La grille desktop s’appuie sur la référence Figma 1512 px, marges 30 et gouttières 20 ; les tailles utilisent des rem et une racine bornée. Les adaptations à deux colonnes et une colonne sont structurelles. ABC Diatype Regular / Medium / Bold est chargée localement via `next/font`.
+
+Le chargement initial et les navigations utilisent un loader discret et un fondu blanc de 320 ms via React ViewTransition. Le scroll reste natif ; les ancres utilisent le lissage du navigateur, avec désactivation en mode « réduire les animations ». Aucun moteur de scroll ni boucle JavaScript supplémentaire n’est ajouté.
