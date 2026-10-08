@@ -1,0 +1,25 @@
+node_modules/
+node_modules
+.sanity/
+next-env.d.ts
+skills-lock.json
+.next/
+dist/
+.env*
+!.env.example
+.vercel/
+playwright-report/
+test-results/
+*.tsbuildinfo
+.DS_Store
+.agents/
+.codex/
+# Unrelated existing work in this workspace
+skritur/
+creativex/
+Skritur Import Fontdue 2026-10-02/
+web/design-reference/
+web/src/data/design-text.json
+studio/schema.json
+
+node_modules-incomplete/

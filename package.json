@@ -1,0 +1,1 @@
+{"name":"tambien-monorepo","private":true,"scripts":{"dev":"npm --prefix web run dev","studio":"npm --prefix studio run dev","build":"npm --prefix web run build","check":"npm --prefix web run typecheck && npm --prefix web run lint && npm --prefix studio run typecheck","test":"npm --prefix web test","typegen":"npm --prefix studio run typegen"}}

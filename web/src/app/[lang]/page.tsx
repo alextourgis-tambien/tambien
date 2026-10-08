@@ -1,0 +1,111 @@
+import Image from "next/image";
+import { notFound } from "next/navigation";
+import { isLanguage, translate } from "@/lib/i18n";
+import { getContent } from "@/lib/content";
+import { metadata, JsonLd, siteUrl } from "@/lib/seo";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
+import { Feed } from "@/components/Feed";
+import { Process } from "@/components/Process";
+import { Media } from "@/components/Media";
+import { homeAssets } from "@/data/seed";
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
+  if (!isLanguage(lang)) return {};
+  const { settings } = await getContent();
+  return metadata(
+    lang,
+    "",
+    "Branding, Web & SEO",
+    translate(settings.hero, lang),
+    settings,
+    settings.defaultSeo,
+  );
+}
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
+  if (!isLanguage(lang)) notFound();
+  const content = await getContent();
+  const { settings } = content;
+  return (
+    <>
+      <Header lang={lang} settings={settings} />
+      <main id="content">
+        <section className="hero">
+          <h1>{translate(settings.hero, lang)}</h1>
+          <div className="awards">
+            <span>
+              <Image
+                src={homeAssets.imgGroup37219}
+                width={43}
+                height={25}
+                alt="Awwwards"
+              />
+              <span className="pill">25+</span>
+            </span>
+            <span>
+              <Image
+                src={homeAssets.imgGroup37218}
+                width={41}
+                height={36}
+                alt="Cannes Lions"
+              />
+              <span className="pill">1</span>
+            </span>
+            <span>
+              <Image
+                src={homeAssets.imgVector2}
+                width={39}
+                height={25}
+                alt="Webflow"
+              />
+              <span className="pill">Partner</span>
+            </span>
+          </div>
+        </section>
+        <Feed items={content.feed} lang={lang} settings={settings} />
+        <Process steps={content.process} lang={lang} settings={settings} />
+        {content.testimonials.length ? (
+          <section className="testimonials">
+            {content.testimonials.map((item) => (
+              <figure key={item._id}>
+                <Media media={item.media} lang={lang} />
+                <blockquote>{translate(item.quote, lang)}</blockquote>
+                <figcaption>
+                  {item.person}, {translate(item.role, lang)}
+                </figcaption>
+              </figure>
+            ))}
+          </section>
+        ) : null}
+      </main>
+      <Footer lang={lang} settings={settings} />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: settings.siteName,
+          url: siteUrl,
+          sameAs: settings.socials.map((item) => item.url),
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: settings.siteName,
+          url: siteUrl,
+          inLanguage: ["fr", "en", "es"],
+        }}
+      />
+    </>
+  );
+}

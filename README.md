@@ -1,0 +1,76 @@
+# También
+
+Site de studio sur mesure : Next.js, ABC Diatype, Sanity et trois langues (FR / EN / ES).
+
+## Organisation
+
+- `web/` : site Next.js, composants, styles et intégration Sanity.
+- `studio/` : Studio Sanity autonome et schémas de contenu.
+
+Les dossiers préexistants `skritur`, `creativex` et les imports Fontdue ne font pas partie de ce repository.
+
+## Démarrage
+
+Node.js 24 ou supérieur.
+
+```sh
+npm --prefix web ci
+npm --prefix studio ci
+npm run dev
+```
+
+Dans un second terminal :
+
+```sh
+npm run studio
+```
+
+Site : http://localhost:3000/fr ; Studio : http://localhost:3333.
+
+Sanity utilise le projet `kxrtuoyl` et le dataset `production`. Les fichiers `.env.local` restent hors de Git. Copier les `.env.example` pour configurer une autre machine.
+
+## Édition
+
+Le Studio contient les projets, pages, offres, cartes du feed, étapes du processus, services, témoignages et réglages généraux. Les textes FR / EN / ES sont édités ensemble ; images et mise en page sont communes.
+
+Les projets acceptent une composition de blocs : texte, image, deux images, image et texte, vidéo, galerie, citation, grand texte, espacement et crédits. Les vidéos sont hébergées sur YouTube ou Vimeo.
+
+Le site lit Sanity. Tant que le document singleton « Réglages du site » n’est pas publié, il utilise le contenu de démonstration provenant de Figma. Une fois ce document publié, les listes publiées de Sanity deviennent la source de vérité (une liste vide reste vide).
+
+## Validation
+
+```sh
+npm run check
+npm run typegen
+npm run build
+npm test
+npm --prefix studio run build
+```
+
+Les tests navigateur vérifient plusieurs largeurs intermédiaires, les pages FR/EN/ES, le menu au clavier, les routes directes, les changements de langue et les erreurs 404.
+
+## Déploiement
+
+Dans Vercel, importer `alextourgis-tambien/tambien` et choisir **Root Directory : web**. Utiliser les variables de `web/.env.example`, avec la vraie URL dans `NEXT_PUBLIC_SITE_URL`. Les branches produisent les aperçus ; `main` est la branche de production.
+
+Le Studio est autonome : `npm --prefix studio run deploy`. Il nécessite une connexion locale via `sanity login`. Déployer les schémas avec `npm --prefix studio run schema:deploy`, puis régénérer les types.
+
+Pour importer le contenu Figma en brouillons : `npm --prefix studio run seed`. Le script téléverse les images et crée les documents absents, sans remplacer les brouillons existants. Valider les textes et publier les réglages du site en dernier. Une vérification sans envoi est disponible avec `cd web && node scripts/seed-sanity.mjs --dry-run`.
+
+Ajouter les origines exactes du site et du Studio dans les réglages CORS Sanity. Ne pas utiliser de wildcard avec des identifiants.
+
+Pour la prévisualisation des brouillons, configurer un token de lecture serveur dans `SANITY_API_READ_TOKEN`, l’URL du Studio dans `NEXT_PUBLIC_SANITY_STUDIO_URL` et celle du site dans `SANITY_STUDIO_PREVIEW_URL`. Aucun secret ne doit porter le préfixe `NEXT_PUBLIC_`.
+
+## Contenus à finaliser avant publication
+
+- Destinations WhatsApp, YouTube, Tools et réseaux sociaux.
+- Galeries et textes définitifs des projets : le portfolio contient uniquement les neuf projets identifiables depuis les textes fournis, sans inventer les projets des autres visuels.
+- Témoignages qui citent « Before Tomorrow » : citations anglaises conservées, à valider avec les auteurs avant publication.
+- Tarifs et durées : la fourchette de l’accueil, le calendrier et les offres restent à harmoniser ; « 18k–23k+ » est conservé tel que fourni.
+- Vidéo Studio, liste de vidéos, informations légales validées.
+
+Le site de travail reste `noindex` et son sitemap est vide tant que `SITE_INDEXABLE` n’est pas `true`. Activer l’indexation seulement après validation du contenu. Les pages projets et légales ont aussi un réglage SEO indépendant.
+
+## Modifications futures
+
+Conserver les composants et tokens existants. La grille desktop s’appuie sur la référence Figma 1512 px, marges 30 et gouttières 20 ; les tailles utilisent des rem et une racine bornée. Les adaptations à deux colonnes et une colonne sont structurelles. ABC Diatype Regular / Medium / Bold est chargée localement via `next/font`.

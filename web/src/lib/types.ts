@@ -1,0 +1,131 @@
+import type { Localized } from "./i18n";
+import type { PortableTextBlock } from "@portabletext/types";
+export type Media = {
+  src: string;
+  alt: Localized;
+  width: number;
+  height: number;
+  crop?: string;
+  background?: string;
+  overlay?: { src: string; width: number; height: number };
+  embedSearch?: boolean;
+};
+export type Seo = {
+  title?: Localized;
+  description?: Localized;
+  ogTitle?: Localized;
+  ogDescription?: Localized;
+  ogImage?: string;
+  canonical?: string;
+  noIndex?: boolean;
+};
+export type ContentBlock = {
+  _key: string;
+  _type: string;
+  text?: Record<string, PortableTextBlock[]>;
+  title?: Localized;
+  image?: Media;
+  images?: Media[];
+  url?: string;
+  caption?: Localized;
+  height?: number;
+  quote?: Localized;
+  attribution?: string;
+  credits?: { name: string; role: Localized }[];
+};
+export type Project = {
+  _id: string;
+  name: string;
+  slug: string;
+  client?: string;
+  year?: number;
+  services?: string[];
+  title: Localized;
+  description: Localized;
+  cover: Media;
+  blocks: ContentBlock[];
+  website?: string;
+  seo?: Seo;
+  order: number;
+  related?: string[];
+  credits?: string;
+  awards?: string[];
+};
+export type FeedItem = {
+  _id: string;
+  kind: "project" | "youtube" | "event" | "news";
+  title: Localized;
+  description: Localized;
+  media: Media;
+  projectSlug?: string;
+  url?: string;
+  order: number;
+};
+export type ProcessStep = {
+  _key: string;
+  title: Localized;
+  summary: Localized;
+  description: Localized;
+  time: Localized;
+  media?: Media;
+};
+export type Testimonial = {
+  _id: string;
+  quote: Localized;
+  person: string;
+  role: Localized;
+  media: Media;
+};
+export type Offer = {
+  _id: string;
+  name: string;
+  price: string;
+  promise: Localized;
+  description: Localized;
+  weeks: string;
+  includes: Localized[];
+  media: Media;
+};
+export type Page = {
+  _id: string;
+  slug: string;
+  title: Localized;
+  description: Localized;
+  media?: Media;
+  videoUrl?: string;
+  blocks?: ContentBlock[];
+  seo?: Seo;
+  status?: Localized;
+};
+export type Settings = {
+  siteName: string;
+  callUrl: string;
+  whatsappUrl?: string;
+  youtubeUrl?: string;
+  toolsUrl?: string;
+  email?: string;
+  socials: { title: string; url: string }[];
+  hero: Localized;
+  cta: Localized;
+  ctaSecondary: Localized;
+  processIntro: Localized;
+  processSubline: Localized;
+  services: {
+    name: Localized;
+    slug: string;
+    description: Localized;
+    media?: Media;
+  }[];
+  clients: { name: string; icon?: string }[];
+  videos: { title: Localized; url: string }[];
+  defaultSeo?: Seo;
+};
+export type SiteContent = {
+  settings: Settings;
+  projects: Project[];
+  feed: FeedItem[];
+  process: ProcessStep[];
+  testimonials: Testimonial[];
+  offers: Offer[];
+  pages: Page[];
+};
