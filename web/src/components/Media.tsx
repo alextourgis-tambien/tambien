@@ -1,3 +1,4 @@
+import { CardCue } from "./CardCue";
 import Image from "next/image";
 import { translate, type Language } from "@/lib/i18n";
 import type { Media as MediaType } from "@/lib/types";
@@ -63,9 +64,7 @@ export function Media({
           </div>
         ) : null}
       </div>
-      <span className="card-cue" aria-hidden="true">
-        ↗
-      </span>
+      <CardCue />
     </div>
   );
 }

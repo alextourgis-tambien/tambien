@@ -1,3 +1,4 @@
+import { CardCue } from "./CardCue";
 import Image from "next/image";
 import Link from "@/components/AppLink";
 import { Media } from "./Media";
@@ -95,9 +96,7 @@ export function WorkGrid({
                     </>
                   ) : null}
                 </div>
-                <span className="card-cue" aria-hidden="true">
-                  ↗
-                </span>
+                <CardCue />
               </div>
             )}
             <h2>{name}</h2>
