@@ -27,6 +27,8 @@ npm run studio
 
 Site : http://localhost:3000/fr ; Studio : http://localhost:3333.
 
+Studio hébergé : https://tambien-kxrtuoyl.sanity.studio. Les contenus Figma y sont importés en brouillons.
+
 Sanity utilise le projet `kxrtuoyl` et le dataset `production`. Les fichiers `.env.local` restent hors de Git. Copier les `.env.example` pour configurer une autre machine.
 
 ## Édition
@@ -55,7 +57,7 @@ Dans Vercel, importer `alextourgis-tambien/tambien` et choisir **Root Directory 
 
 Le Studio est autonome : `npm --prefix studio run deploy`. Il nécessite une connexion locale via `sanity login`. Déployer les schémas avec `npm --prefix studio run schema:deploy`, puis régénérer les types.
 
-Pour importer le contenu Figma en brouillons : `npm --prefix studio run seed`. Le script téléverse les images et crée les documents absents, sans remplacer les brouillons existants. Valider les textes et publier les réglages du site en dernier. Une vérification sans envoi est disponible avec `cd web && node scripts/seed-sanity.mjs --dry-run`.
+Pour importer le contenu Figma en brouillons : `npm --prefix studio run seed`. Le script téléverse les images et crée les documents absents, sans remplacer les brouillons existants. Valider les textes, publier les services et projets avant les cartes du feed, puis publier les réglages du site en dernier. Les références des cartes signalent les projets encore en brouillon jusqu’à leur publication. Une vérification sans envoi est disponible avec `cd web && node scripts/seed-sanity.mjs --dry-run`.
 
 Ajouter les origines exactes du site et du Studio dans les réglages CORS Sanity. Ne pas utiliser de wildcard avec des identifiants.
 

@@ -6,6 +6,6 @@ export const client = createClient({
   useCdn: true,
   stega: {
     studioUrl:
-      process.env.NEXT_PUBLIC_SANITY_STUDIO_URL || "http://localhost:3333",
+      process.env.NEXT_PUBLIC_SANITY_STUDIO_URL || "https://tambien-kxrtuoyl.sanity.studio",
   },
 });

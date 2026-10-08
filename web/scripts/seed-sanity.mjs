@@ -12,11 +12,11 @@ const assets = JSON.parse(
 let source = await readFile(path.join(web, "src/data/seed.ts"), "utf8");
 source = source
   .replace(
-    "import assets from './assets.json';",
+    /import assets from ['"]\.\/assets\.json['"];?/,
     `const assets=${JSON.stringify(assets)};`,
   )
   .replace(
-    "import { localized as l } from '@/lib/i18n';",
+    /import\s*\{\s*localized as l\s*\}\s*from ['"]@\/lib\/i18n['"];?/,
     "const l=(en,fr,es)=>({en,fr,es});",
   );
 const code = ts.transpileModule(source, {
@@ -110,7 +110,8 @@ async function convert(value) {
       "statement",
       "spacer",
       "credits",
-    ].includes(value._type)
+    ].includes(value._type) &&
+    !value.asset
   ) {
     result.kind = value._type;
     result._type = "contentBlock";
@@ -140,11 +141,13 @@ for (const project of seed.projects)
       _type: "reference",
       _ref: id("service", slug),
       _weak: true,
+      _strengthenOnPublish: { type: "service" },
     })),
     related: (project.related || []).map((ref) => ({
       _type: "reference",
       _ref: id("project", ref),
       _weak: true,
+      _strengthenOnPublish: { type: "project" },
     })),
   });
 for (const item of seed.feed) {
@@ -161,6 +164,7 @@ for (const item of seed.feed) {
                 projectSlug,
             ),
             _weak: true,
+            _strengthenOnPublish: { type: "project" },
           },
         }
       : {}),
