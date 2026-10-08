@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { languages, translate, type Language } from "./i18n";
 import type { Seo, Settings } from "./types";
 export const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : "http://localhost:3000");
 export function metadata(
   lang: Language,
   path: string,
