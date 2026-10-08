@@ -53,6 +53,8 @@ Les tests navigateur vérifient plusieurs largeurs intermédiaires, les pages FR
 
 ## Déploiement
 
+Aperçu validé : https://tambien-r486yl3za-alextourgis-6133.vercel.app/fr. Le projet Vercel `tambien` est dans l’espace personnel `alextourgis-6133`. Le code est sur la branche `codex/website-foundation`. Pour activer les déploiements Git automatiques, ajouter le compte GitHub También aux Login Connections de Vercel, puis connecter ce repository dans les réglages Git du projet.
+
 Dans Vercel, importer `alextourgis-tambien/tambien` et choisir **Root Directory : web**. Utiliser les variables de `web/.env.example`, avec la vraie URL dans `NEXT_PUBLIC_SITE_URL`. Les branches produisent les aperçus ; `main` est la branche de production.
 
 Le Studio est autonome : `npm --prefix studio run deploy`. Il nécessite une connexion locale via `sanity login`. Déployer les schémas avec `npm --prefix studio run schema:deploy`, puis régénérer les types.

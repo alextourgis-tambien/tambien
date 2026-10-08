@@ -5,7 +5,7 @@ export default defineConfig({
   workers: 1,
   use: { baseURL: "http://127.0.0.1:3000", headless: true },
   webServer: {
-    command: "npm run dev -- --webpack --hostname 127.0.0.1",
+    command: "npm run dev -- --hostname 127.0.0.1",
     url: "http://127.0.0.1:3000/en",
     reuseExistingServer: true,
     timeout: 120000,
