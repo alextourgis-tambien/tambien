@@ -1143,19 +1143,57 @@ main {
   background: none;
   cursor: pointer;
 }
-.video-start span {
+.video-play-cue {
   position: absolute;
-  bottom: 1rem;
-  left: 1rem;
-  background: #0009;
-  padding: 0.4rem 0.65rem;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.65rem 0.9rem;
   border-radius: 2rem;
-  opacity: 0;
-  transition: opacity 180ms;
+  background: white;
+  color: black;
+  font-size: 0.8125rem;
+  line-height: 1;
+  pointer-events: none;
 }
-.video-start:hover span,
-.video-start:focus-visible span {
-  opacity: 1;
+.play-icon {
+  font-size: 0.6rem;
+}
+@media (min-width: 700px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .video-start {
+    cursor: none;
+  }
+  .video-play-cue {
+    left: 0;
+    top: 0;
+    opacity: 0;
+    transition: opacity 150ms ease;
+  }
+  .video-play-cue[data-visible="true"] {
+    opacity: 1;
+  }
+  .video-start:focus-visible .video-play-cue {
+    left: 50%;
+    top: 50%;
+    opacity: 1;
+    transform: translate(-50%, -50%) !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .studio-video {
+    transform: none !important;
+  }
+}
+@media (max-width: 699px),
+  (hover: none),
+  (pointer: coarse),
+  (prefers-reduced-motion: reduce) {
+  .video-play-cue {
+    transform: translate(-50%, -50%) !important;
+  }
 }
 .video-error {
   position: absolute;
