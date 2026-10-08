@@ -36,12 +36,25 @@ export default async function Home({
   if (!isLanguage(lang)) notFound();
   const content = await getContent();
   const { settings } = content;
+  const hero = translate(settings.hero, lang);
+  const heroParts = hero.match(/^(.*?)(through |grâce au |a través del )(Branding.*)$/su);
   return (
     <PageFade key={lang}>
       <Header lang={lang} settings={settings} />
       <main id="content">
         <section className="hero">
-          <h1>{translate(settings.hero, lang)}</h1>
+          <h1>
+            {heroParts ? (
+              <>
+                {heroParts[1].trimEnd()}
+                {" "}
+                <span className="hero-ending">
+                  {heroParts[2]}
+                  <span className="hero-services">{heroParts[3]}</span>
+                </span>
+              </>
+            ) : hero}
+          </h1>
           <div className="awards">
             <span>
               <Image

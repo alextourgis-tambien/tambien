@@ -1659,3 +1659,8 @@ html {
   .menu-control-layer .header-nav { grid-column: 2; }
   .menu-control-layer .header-nav > span { display: none; }
 }
+
+.hero-services { color: #999; }
+@media (min-width: 1001px) {
+  .hero-ending { display: block; }
+}
