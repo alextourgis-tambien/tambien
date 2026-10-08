@@ -345,6 +345,33 @@ const projects: Project[] = feed
     order: item.order,
     seo: { noIndex: true },
   }));
+const workImages = assets["4115-4616"];
+const roseNews = feed.find((item) => item._id === "club-des-da")!;
+for (const [slug, name, key, position] of [
+  ["rose-island", "Rose Island", "imgRectangle4", 9],
+  ["bond", "Bond", "imgRectangle3", 13],
+  ["bilzig", "Bilzig", "imgBilzig031", 15],
+] as const) {
+  projects.push({
+    _id: slug,
+    name,
+    slug,
+    title: l(name, name, name),
+    description:
+      slug === "rose-island"
+        ? roseNews.description
+        : l(
+            `Discover ${name} in images.`,
+            `Découvrez ${name} en images.`,
+            `Descubre ${name} en imágenes.`,
+          ),
+    cover: media(workImages[key], 348, 422, name),
+    workPosition: position,
+    blocks: [],
+    order: position,
+    seo: { noIndex: true },
+  });
+}
 export const seed: SiteContent = {
   settings: {
     siteName: "También",

@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import { randomUUID } from "node:crypto";
 import ts from "typescript";
 import { createClient } from "@sanity/client";
 
@@ -133,23 +134,48 @@ for (const [order, service] of seed.settings.services.entries())
     { ...service, slug: { _type: "slug", current: service.slug }, order },
     id("service", service.slug),
   );
-for (const project of seed.projects)
-  add("project", {
-    ...project,
-    slug: { _type: "slug", current: project.slug },
-    services: (project.services || []).map((slug) => ({
-      _type: "reference",
-      _ref: id("service", slug),
-      _weak: true,
-      _strengthenOnPublish: { type: "service" },
-    })),
-    related: (project.related || []).map((ref) => ({
-      _type: "reference",
-      _ref: id("project", ref),
-      _weak: true,
-      _strengthenOnPublish: { type: "project" },
-    })),
-  });
+const storedProjects = dryRun
+  ? []
+  : await client.fetch(
+      '*[_type == "project" && defined(slug.current)]{_id,"slug":slug.current}',
+      {},
+      { perspective: "raw" },
+    );
+const projectIds = new Map(
+  storedProjects.map((project) => [
+    project.slug,
+    project._id.replace(/^drafts\./, ""),
+  ]),
+);
+const existingSlugs = new Set(projectIds.keys());
+for (const project of seed.projects) {
+  if (!projectIds.has(project.slug)) projectIds.set(project.slug, randomUUID());
+}
+for (const project of seed.projects) {
+  if (existingSlugs.has(project.slug)) continue;
+  add(
+    "project",
+    {
+      ...project,
+      slug: { _type: "slug", current: project.slug },
+      services: (project.services || []).map((slug) => ({
+        _type: "reference",
+        _ref: id("service", slug),
+        _weak: true,
+        _strengthenOnPublish: { type: "service" },
+      })),
+      related: (project.related || []).map((ref) => ({
+        _type: "reference",
+        _ref: projectIds.get(
+          seed.projects.find((item) => item._id === ref)?.slug || ref,
+        ),
+        _weak: true,
+        _strengthenOnPublish: { type: "project" },
+      })),
+    },
+    projectIds.get(project.slug),
+  );
+}
 for (const item of seed.feed) {
   const { projectSlug, ...data } = item;
   add("feedItem", {
@@ -158,11 +184,7 @@ for (const item of seed.feed) {
       ? {
           project: {
             _type: "reference",
-            _ref: id(
-              "project",
-              seed.projects.find((p) => p.slug === projectSlug)?._id ||
-                projectSlug,
-            ),
+            _ref: projectIds.get(projectSlug),
             _weak: true,
             _strengthenOnPublish: { type: "project" },
           },

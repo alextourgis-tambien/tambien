@@ -4,26 +4,8 @@ import { Media } from "./Media";
 import assets from "@/data/assets.json";
 import { translate, type Language } from "@/lib/i18n";
 import type { Project } from "@/lib/types";
+import { getWorkCards } from "@/lib/work";
 const images = assets["4115-4616"];
-const cards = [
-  ["table22", "imgRectangle1"],
-  ["green-got", "imgRectangle5"],
-  ["mat-crepel", "imgRectangle9"],
-  ["carres-solidaires", "imgRectangle11"],
-  ["last-prisoner-project", "imgRectangle2"],
-  ["exploro-tour", "imgRectangle6"],
-  ["velia", "imgCaptureDecran20241109A2242011"],
-  ["pending-8", "imgRectangle12"],
-  ["rose-island", "imgRectangle4"],
-  ["pending-10", "imgRectangle7"],
-  ["socialclub", "imgRectangle10"],
-  ["heetch", "imgRectangle13"],
-  ["pending-13", "imgRectangle3"],
-  ["pending-14", "imgRectangle21"],
-  ["pending-15", "imgBilzig031"],
-  ["pending-16", "imgRectangle8"],
-] as const;
-export const workCardCount = cards.length;
 export function WorkGrid({
   projects,
   lang,
@@ -33,36 +15,35 @@ export function WorkGrid({
 }) {
   return (
     <div className="project-grid work-grid">
-      {cards.map(([slug, key], index) => {
-        const project =
-          projects.find((item) => item.workPosition === index + 1) ||
-          projects.find((item) => item.slug === slug);
+      {getWorkCards(projects).map(({ key, project, slot, assetKey }) => {
         const name =
           project?.name ||
-          (slug === "rose-island"
-            ? "Rose Island"
-            : {
-                fr: "Projet à venir",
-                en: "Project coming soon",
-                es: "Proyecto próximamente",
-              }[lang]);
+          {
+            fr: "Projet à identifier",
+            en: "Project to identify",
+            es: "Proyecto por identificar",
+          }[lang];
         const body = (
           <>
-            {project?.workCover ? (
+            {project && (project.workCover || !assetKey) ? (
               <Media
-                media={{ ...project.workCover, width: 348, height: 422 }}
+                media={{
+                  ...(project.workCover || project.cover),
+                  width: 348,
+                  height: 422,
+                }}
                 lang={lang}
               />
             ) : (
-              <div className={`work-cover work-cover-${index + 1}`}>
+              <div className={`work-cover work-cover-${slot}`}>
                 <div className="motion-visual">
                   <Image
-                    src={images[key]}
+                    src={images[assetKey!]}
                     fill
                     alt={name}
                     sizes="(max-width: 600px) 92vw, (max-width: 1000px) 46vw, 24vw"
                   />
-                  {index === 5 ? (
+                  {slot === 6 ? (
                     <div className="travel-search" aria-hidden="true">
                       <span>
                         City
@@ -77,7 +58,7 @@ export function WorkGrid({
                       <span className="pill dark">Discover</span>
                     </div>
                   ) : null}
-                  {index === 13 ? (
+                  {slot === 14 ? (
                     <>
                       <Image
                         className="work-layer-top"
@@ -95,7 +76,7 @@ export function WorkGrid({
                       />
                     </>
                   ) : null}
-                  {index === 14 ? (
+                  {slot === 15 ? (
                     <>
                       <Image
                         className="work-layer-bottom"
@@ -132,7 +113,7 @@ export function WorkGrid({
           </>
         );
         return (
-          <article key={slug}>
+          <article key={key}>
             {project ? (
               <Link data-motion-card href={`/${lang}/projects/${project.slug}`}>
                 {body}

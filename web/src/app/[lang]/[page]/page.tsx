@@ -1,3 +1,4 @@
+import { getWorkCards } from "@/lib/work";
 import { PageFade } from "@/components/PageFade";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -9,7 +10,7 @@ import { Footer } from "@/components/Footer";
 import { Media } from "@/components/Media";
 import { Blocks } from "@/components/Blocks";
 import { homeAssets } from "@/data/seed";
-import { WorkGrid, workCardCount } from "@/components/WorkGrid";
+import { WorkGrid } from "@/components/WorkGrid";
 import { StudioVideo } from "@/components/StudioVideo";
 type Props = { params: Promise<{ lang: string; page: string }> };
 export async function generateMetadata({ params }: Props) {
@@ -44,7 +45,8 @@ export default async function Page({ params }: Props) {
         {page === "work" ? (
           <>
             <h1 className="work-title">
-              {t.selected} <span>({workCardCount})</span>
+              {t.selected}{" "}
+              <span>({getWorkCards(content.projects).length})</span>
             </h1>
             <WorkGrid projects={content.projects} lang={lang} />
           </>
