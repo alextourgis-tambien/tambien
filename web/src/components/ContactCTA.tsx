@@ -13,12 +13,13 @@ export function ContactCTA({
   settings: Settings;
 }) {
   const t = labels[lang];
-  const { area, follower, move, reset } = useFollower<HTMLAnchorElement>();
+  const { area, follower, move } = useFollower<HTMLAnchorElement>({
+    trackOnArrival: true,
+  });
   return (
     <section
       ref={area}
       onPointerMove={move}
-      onPointerLeave={reset}
       className="contact-cta"
       aria-labelledby="contact-title"
     >
