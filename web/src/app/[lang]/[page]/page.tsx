@@ -9,7 +9,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Media } from "@/components/Media";
 import { Blocks, Video } from "@/components/Blocks";
-import { homeAssets } from "@/data/seed";
+import { homeAssets, studioVideoPoster } from "@/data/seed";
 import { WorkGrid } from "@/components/WorkGrid";
 import { StudioVideo } from "@/components/StudioVideo";
 type Props = { params: Promise<{ lang: string; page: string }> };
@@ -92,7 +92,7 @@ export default async function Page({ params }: Props) {
               <div className="studio-portrait">
                 <StudioVideo
                   url={data.videoUrl}
-                  poster={data.media?.src}
+                  poster={data.media?.src || studioVideoPoster}
                   label={t.play}
                 />
               </div>

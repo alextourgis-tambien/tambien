@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useEffect, useRef, useState, type PointerEvent } from "react";
 export const temporaryStudioVideo =
   "https://player.vimeo.com/progressive_redirect/playback/1059541602/rendition/1080p/file.mp4%20%281080p%29.mp4?loc=external&signature=0352dc43b45db1b7622b0dd94ee7529b57700757664b047322d773d29fbbb4e6";
@@ -20,6 +21,8 @@ export function StudioVideo({
   const pointer = useRef({ x: 0, y: 0, targetX: 0, targetY: 0, frame: 0 });
   const [full, setFull] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [readySource, setReadySource] = useState<string | null>(null);
+  const source = url || temporaryStudioVideo;
   useEffect(() => {
     const motion = matchMedia("(prefers-reduced-motion: no-preference)");
     cursorMotion.current = matchMedia(
@@ -120,13 +123,17 @@ export function StudioVideo({
     <div ref={wrapper} className="studio-video">
       <video
         ref={video}
-        src={url || temporaryStudioVideo}
+        src={source}
         poster={poster}
         muted={!full}
         playsInline
         controls={full}
         preload="metadata"
-        onError={() => setFailed(true)}
+        onLoadedData={() => setReadySource(source)}
+        onError={() => {
+          setFailed(true);
+          setReadySource(null);
+        }}
         onTimeUpdate={() => {
           if (!full && video.current && video.current.currentTime >= 10)
             video.current.currentTime = 0;
@@ -140,6 +147,18 @@ export function StudioVideo({
           }
         }}
       />
+      {poster ? (
+        <Image
+          className="video-poster"
+          src={poster}
+          alt=""
+          fill
+          priority={parallax}
+          sizes={parallax ? "(max-width: 699px) 85vw, 25vw" : "(max-width: 699px) 92vw, 65vw"}
+          data-ready={readySource === source}
+          aria-hidden="true"
+        />
+      ) : null}
       {!full ? (
         <button
           className="video-start"

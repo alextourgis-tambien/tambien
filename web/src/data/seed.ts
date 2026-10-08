@@ -3,6 +3,7 @@ import { localized as l } from "@/lib/i18n";
 import type { SiteContent, Media, FeedItem, Project } from "@/lib/types";
 export const homeAssets = assets.home;
 const studio = assets["4115-4812"];
+export const studioVideoPoster = studio.imgStudioVideoPoster;
 const pricing = assets["4115-4757"];
 const event = assets["4115-4904"];
 const media = (

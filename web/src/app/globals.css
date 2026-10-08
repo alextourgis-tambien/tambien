@@ -1249,6 +1249,16 @@ main {
   object-fit: cover;
   border-radius: var(--radius);
 }
+.studio-video .video-poster {
+  object-fit: cover;
+  border-radius: var(--radius);
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 180ms ease;
+}
+.studio-video .video-poster[data-ready="true"] {
+  opacity: 0;
+}
 .video-start {
   position: absolute;
   inset: 0;
