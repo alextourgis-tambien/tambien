@@ -26,7 +26,7 @@ function normalize(value: unknown): unknown {
     return {
       src: createImageUrlBuilder(client)
         .image(image as SanityImageSource)
-        .auto("format")
+        .format("webp")
         .width(2000)
         .url(),
       width: Number(obj.frameWidth || dimensions?.[1] || 1600),
@@ -50,7 +50,7 @@ function normalize(value: unknown): unknown {
   )
     return createImageUrlBuilder(client)
       .image(obj as SanityImageSource)
-      .auto("format")
+      .format("webp")
       .width(1200)
       .url();
   const result = Object.fromEntries(

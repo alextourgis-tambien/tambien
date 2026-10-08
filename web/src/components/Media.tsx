@@ -7,11 +7,13 @@ export function Media({
   lang,
   priority = false,
   className = "",
+  sizes = "(max-width: 600px) 92vw, (max-width: 1000px) 46vw, 24vw",
 }: {
   media: MediaType;
   lang: Language;
   priority?: boolean;
   className?: string;
+  sizes?: string;
 }) {
   return (
     <div
@@ -41,7 +43,7 @@ export function Media({
             alt={translate(media.alt, lang)}
             fill
             priority={priority}
-            sizes="(max-width: 600px) 92vw, (max-width: 1000px) 46vw, 24vw"
+            sizes={sizes}
             style={{
               objectFit: "cover",
               objectPosition: media.crop || "center",

@@ -787,7 +787,14 @@ seed.testimonials = [
     _id: "sam-bernstein",
     person: "Sam Bernstein",
     role: l("Table 22 CEO", "CEO de Table 22", "CEO de Table 22"),
-    media: media(homeAssets.imgRectangle10, 471, 336, "Sam Bernstein"),
+    media: media(
+      homeAssets.imgRectangle10,
+      471,
+      336,
+      "Portrait of Sam Bernstein, CEO of Table 22",
+      "Portrait de Sam Bernstein, CEO de Table 22",
+      "Retrato de Sam Bernstein, CEO de Table 22",
+    ),
     quote: l(
       "Before Tomorrow helped us translate a complex business into a clear, compelling experience. The result wasn’t just a better website. It gave us a stronger foundation to communicate our vision, build trust, and support our next stage of growth.",
       "Before Tomorrow nous a aidés à traduire une activité complexe en une expérience claire et convaincante. Le résultat va au-delà d’un meilleur site : une base plus solide pour communiquer notre vision, inspirer confiance et accompagner notre prochaine étape de croissance.",
@@ -802,7 +809,14 @@ seed.testimonials = [
       "Snowboarder olympique",
       "Snowboarder olímpico",
     ),
-    media: media(homeAssets.imgRectangle11, 471, 336, "Mat Crépel"),
+    media: media(
+      homeAssets.imgRectangle11,
+      471,
+      336,
+      "Portrait of Mat Crépel",
+      "Portrait de Mat Crépel",
+      "Retrato de Mat Crépel",
+    ),
     quote: l(
       "We needed a website that could bring together our story, our vision, and the ambition behind the business. Before Tomorrow understood that instantly, creating an experience that feels clear, distinctive, and perfectly aligned with where we’re heading.",
       "Nous avions besoin d’un site capable de réunir notre histoire, notre vision et nos ambitions. Before Tomorrow l’a immédiatement compris et a créé une expérience claire, singulière et parfaitement alignée avec notre direction.",
@@ -817,7 +831,14 @@ seed.testimonials = [
       "CEO de Carrés Solidaires",
       "CEO de Carrés Solidaires",
     ),
-    media: media(homeAssets.imgRectangle12, 471, 336, "Dhylan Samba"),
+    media: media(
+      homeAssets.imgRectangle12,
+      471,
+      336,
+      "Portrait of Dhylan Samba, CEO of Carrés Solidaires",
+      "Portrait de Dhylan Samba, CEO de Carrés Solidaires",
+      "Retrato de Dhylan Samba, CEO de Carrés Solidaires",
+    ),
     quote: l(
       "Our mission is ambitious, but explaining it simply wasn’t easy. Before Tomorrow helped us clarify our story and turn it into a website that builds trust, creates credibility, and supports our growth every day.",
       "Notre mission est ambitieuse, mais l’expliquer simplement n’était pas facile. Before Tomorrow nous a aidés à clarifier notre histoire et à la transformer en un site qui inspire confiance, renforce notre crédibilité et soutient notre croissance au quotidien.",

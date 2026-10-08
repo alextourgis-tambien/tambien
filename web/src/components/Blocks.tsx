@@ -70,11 +70,22 @@ export function Blocks({
             />
           ) : null}
           {block.title ? <h2>{translate(block.title, lang)}</h2> : null}
-          {block.image ? <Media media={block.image} lang={lang} /> : null}
+          {block.image ? (
+            <Media
+              media={block.image}
+              lang={lang}
+              sizes="(max-width: 600px) 92vw, 65vw"
+            />
+          ) : null}
           {block.images ? (
             <div className="block-gallery">
               {block.images.map((media, index) => (
-                <Media key={media.src + index} media={media} lang={lang} />
+                <Media
+                  key={media.src + index}
+                  media={media}
+                  lang={lang}
+                  sizes="(max-width: 600px) 92vw, 32vw"
+                />
               ))}
             </div>
           ) : null}

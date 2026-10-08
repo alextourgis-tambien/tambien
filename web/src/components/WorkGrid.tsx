@@ -41,7 +41,14 @@ export function WorkGrid({
                   <Image
                     src={images[assetKey!]}
                     fill
-                    alt={name}
+                    alt={
+                      translate(project?.cover.alt, lang) ||
+                      {
+                        fr: `Aperçu du projet : ${name}`,
+                        en: `Project preview: ${name}`,
+                        es: `Vista del proyecto: ${name}`,
+                      }[lang]
+                    }
                     sizes="(max-width: 600px) 92vw, (max-width: 1000px) 46vw, 24vw"
                   />
                   {slot === 6 ? (

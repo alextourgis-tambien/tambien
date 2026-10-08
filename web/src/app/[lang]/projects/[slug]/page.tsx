@@ -61,7 +61,12 @@ export default async function Project({ params }: Props) {
             {project.blocks.length ? (
               <Blocks blocks={project.blocks} lang={lang} />
             ) : (
-              <Media media={project.cover} lang={lang} priority />
+              <Media
+                media={project.cover}
+                lang={lang}
+                priority
+                sizes="(max-width: 600px) 92vw, 65vw"
+              />
             )}
           </div>
         </article>

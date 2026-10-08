@@ -78,7 +78,11 @@ export default async function Home({
           <section className="testimonials">
             {content.testimonials.map((item) => (
               <figure key={item._id}>
-                <Media media={item.media} lang={lang} />
+                <Media
+                  media={item.media}
+                  lang={lang}
+                  sizes="(max-width: 600px) 92vw, (max-width: 1000px) 46vw, 32vw"
+                />
                 <blockquote>{translate(item.quote, lang)}</blockquote>
                 <figcaption>
                   {item.person}, {translate(item.role, lang)}

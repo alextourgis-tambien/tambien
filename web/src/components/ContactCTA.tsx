@@ -46,7 +46,14 @@ export function ContactCTA({
               src={homeAssets.imgRectangle2}
               width={42}
               height={42}
-              alt="Alex"
+              alt={translate(
+                {
+                  en: "Portrait of Alex Tourgis, founder of También",
+                  fr: "Portrait d’Alex Tourgis, fondateur de También",
+                  es: "Retrato de Alex Tourgis, fundador de También",
+                },
+                lang,
+              )}
             />
             <span>
               <strong>{t.contact}</strong>
