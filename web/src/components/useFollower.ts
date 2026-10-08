@@ -2,7 +2,8 @@
 import { useEffect, useRef, type PointerEvent } from "react";
 export function useFollower<T extends HTMLElement>({
   trackOnArrival = false,
-}: { trackOnArrival?: boolean } = {}) {
+  allowVerticalOverflow = false,
+}: { trackOnArrival?: boolean; allowVerticalOverflow?: boolean } = {}) {
   const area = useRef<HTMLElement>(null);
   const follower = useRef<T>(null);
   const wake = useRef<() => void>(() => {});
@@ -34,7 +35,7 @@ export function useFollower<T extends HTMLElement>({
         Math.max(
           0,
           Math.min(
-            bounds.height - node.offsetHeight,
+            allowVerticalOverflow ? Infinity : bounds.height - node.offsetHeight,
             clientY - bounds.top + 24,
           ),
         ) - top,

@@ -15,7 +15,9 @@ export function Process({
 }) {
   const [expanded, setExpanded] = useState<string | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
-  const { area, follower, move, reset } = useFollower<HTMLDivElement>();
+  const { area, follower, move, reset } = useFollower<HTMLDivElement>({
+    allowVerticalOverflow: true,
+  });
   const active = steps.find((step) => step._key === hovered);
   return (
     <section
