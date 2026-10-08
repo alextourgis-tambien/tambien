@@ -143,16 +143,7 @@ export function Header({
         <nav className="header-nav" aria-label={t.menu}>
           <Link href={`/${lang}/work`}>{t.work}</Link>
           <Link href={`/${lang}/studio`}>{t.studio}</Link>
-          <button
-            ref={trigger}
-            className="menu-trigger pill"
-            onClick={() => setOpen(true)}
-            aria-label={t.menu}
-            aria-expanded={open}
-            aria-controls="site-menu"
-          >
-            <MenuIcon />
-          </button>
+          <span className="menu-trigger" aria-hidden="true" />
         </nav>
         <div className="header-contact">
           <a className="pill dark" href={settings.callUrl}>
@@ -165,6 +156,22 @@ export function Header({
           ) : null}
         </div>
       </header>
+      <div className="header menu-control-layer">
+        <div className="header-nav">
+          <span aria-hidden="true">{t.work}</span>
+          <span aria-hidden="true">{t.studio}</span>
+          <button
+            ref={trigger}
+            className="menu-trigger pill"
+            onClick={() => setOpen(true)}
+            aria-label={t.menu}
+            aria-expanded={open}
+            aria-controls="site-menu"
+          >
+            <MenuIcon />
+          </button>
+        </div>
+      </div>
       <dialog
         id="site-menu"
         ref={dialog}
