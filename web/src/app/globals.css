@@ -336,8 +336,7 @@ main {
   position: relative;
 }
 .cta-call {
-  min-height: 2.75rem;
-  padding: 0.625rem 1.25rem;
+  font-weight: 500;
 }
 .founder {
   display: flex;
