@@ -11,7 +11,8 @@ test("menu matches the compact black dropdown and hover emphasis", async ({
     "background-color",
     "rgb(0, 0, 0)",
   );
-  await expect(page.locator(".menu-panel nav > *")).toHaveCount(7);
+  await expect(page.locator(".menu-panel nav > *")).toHaveCount(6);
+  await expect(page.locator(".menu-panel nav")).not.toContainText("Services");
   const studio = page
     .locator(".menu-panel nav a")
     .filter({ hasText: "Studio" });
@@ -21,7 +22,7 @@ test("menu matches the compact black dropdown and hover emphasis", async ({
     "opacity",
     "0.5",
   );
-  await expect(page.locator(".menu-languages > small")).toHaveText("08");
+  await expect(page.locator(".menu-languages > small")).toHaveText("07");
   await page.keyboard.press("Escape");
   await expect(trigger).toBeFocused();
 });

@@ -55,7 +55,6 @@ export function Header({
   const entries = [
     { title: t.work, url: `/${lang}/work` },
     { title: t.studio, url: `/${lang}/studio` },
-    { title: t.services, url: `/${lang}/studio#services` },
     {
       title: "Email us",
       url: settings.email ? `mailto:${settings.email}` : "",
@@ -79,7 +78,7 @@ export function Header({
         </span>
         <nav className="header-nav" aria-label={t.menu}>
           <Link href={`/${lang}/work`}>{t.work}</Link>
-          <Link href={`/${lang}/studio#services`}>{t.services}</Link>
+          <Link href={`/${lang}/studio`}>{t.studio}</Link>
           <button
             ref={trigger}
             className="menu-trigger pill"
@@ -175,7 +174,7 @@ export function Header({
                 </Link>
               ))}
             </div>
-            <small>08</small>
+            <small>{String(entries.length + 1).padStart(2, "0")}</small>
           </div>
         </div>
       </dialog>

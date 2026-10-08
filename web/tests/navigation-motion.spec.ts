@@ -25,8 +25,8 @@ test("navigation fades through white, including sibling pages and project routes
     }) as typeof document.startViewTransition;
   });
   await page.goto("/fr/work");
-  await page.locator(".header-nav a").filter({ hasText: "Services" }).click();
-  await expect(page).toHaveURL(/\/fr\/studio#services$/);
+  await page.locator(".header-nav a").filter({ hasText: "Studio" }).click();
+  await expect(page).toHaveURL(/\/fr\/studio$/);
   await expect(page.locator(".studio-lists")).toBeVisible();
   await expect
     .poll(() =>
@@ -37,6 +37,7 @@ test("navigation fades through white, including sibling pages and project routes
     .toEqual(expect.arrayContaining(["page-out", "page-in"]));
   await page.locator(".header-nav a").filter({ hasText: "Projets" }).click();
   await expect(page).toHaveURL(/\/fr\/work$/);
+  await page.waitForTimeout(400); // Let the page fade release pointer events.
   await page.locator(".work-grid a").first().click();
   await expect(page).toHaveURL(/\/fr\/projects\/table22$/);
   await page.goBack();
@@ -44,23 +45,15 @@ test("navigation fades through white, including sibling pages and project routes
   await expect(page.locator(".initial-loader")).not.toBeVisible();
   expect(errors).toEqual([]);
 });
-test("scroll stays native and same-page anchors are smooth", async ({
+test("scroll stays native and the Studio link returns to the page top", async ({
   page,
 }) => {
   await page.goto("/fr/studio");
   await expect(page.locator("html")).toHaveCSS("scroll-behavior", "smooth");
   await page.mouse.wheel(0, 500);
   await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(300);
-  await page.locator(".header-nav a").filter({ hasText: "Services" }).click();
-  await expect
-    .poll(
-      () =>
-        page
-          .locator(".studio-lists")
-          .evaluate((node) => Math.abs(node.getBoundingClientRect().top)),
-      { timeout: 5000 },
-    )
-    .toBeLessThan(50);
+  await page.locator(".header-nav a").filter({ hasText: "Studio" }).click();
+  await expect.poll(() => page.evaluate(() => scrollY)).toBeLessThan(50);
 });
 test("reduced motion and disabled JavaScript keep the site usable", async ({
   browser,
@@ -70,8 +63,8 @@ test("reduced motion and disabled JavaScript keep the site usable", async ({
   await page.goto("/fr/work");
   await expect(page.locator("html")).toHaveCSS("scroll-behavior", "auto");
   await expect(page.locator(".initial-loader")).not.toBeVisible();
-  await page.locator(".header-nav a").filter({ hasText: "Services" }).click();
-  await expect(page).toHaveURL(/\/fr\/studio#services$/);
+  await page.locator(".header-nav a").filter({ hasText: "Studio" }).click();
+  await expect(page).toHaveURL(/\/fr\/studio$/);
   const context = await browser.newContext({ javaScriptEnabled: false });
   const staticPage = await context.newPage();
   await staticPage.goto("http://127.0.0.1:3000/fr/work");
