@@ -55,7 +55,7 @@ Les tests navigateur vérifient plusieurs largeurs intermédiaires, les pages FR
 
 Portfolio : les 16 visuels de Figma sont présents, avec 12 projets identifiés et accessibles. Les positions 8, 10, 14 et 16 attendent encore leurs noms ; Figma utilise le titre provisoire « Table 22 ». Les projets supplémentaires de Sanity s’ajoutent à la grille, et son compteur suit le nombre de cartes affichées. `web/scripts/import-work-projects.mjs` ajoute uniquement les nouveaux projets en brouillon, sans remplacer les contenus édités.
 
-Aperçu validé : https://tambien-5fh99nglu-alextourgis-6133.vercel.app/fr. Le projet Vercel `tambien` est dans l’espace personnel `alextourgis-6133`. Le code est sur la branche `codex/website-foundation`. Pour activer les déploiements Git automatiques, ajouter le compte GitHub También aux Login Connections de Vercel, puis connecter ce repository dans les réglages Git du projet.
+Aperçu validé : https://tambien-4r3hq64ct-alextourgis-6133.vercel.app/fr. Le projet Vercel `tambien` est dans l’espace personnel `alextourgis-6133`. Le code est sur la branche `codex/website-foundation`. Pour activer les déploiements Git automatiques, ajouter le compte GitHub También aux Login Connections de Vercel, puis connecter ce repository dans les réglages Git du projet.
 
 Dans Vercel, importer `alextourgis-tambien/tambien` et choisir **Root Directory : web**. Utiliser les variables de `web/.env.example`, avec la vraie URL dans `NEXT_PUBLIC_SITE_URL`. Les branches produisent les aperçus ; `main` est la branche de production.
 
